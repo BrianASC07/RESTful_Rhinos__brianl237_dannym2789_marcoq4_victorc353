@@ -1,3 +1,6 @@
 brianL -- 2024-11-25 23:30
 * Added initial files and folders for devlog, requirements, and app
 * Added team flag made by Danny
+
+brainL, victorC, dannyM, marcoQ -- 2024-11-26 10:58
+* Contributed to the design document
