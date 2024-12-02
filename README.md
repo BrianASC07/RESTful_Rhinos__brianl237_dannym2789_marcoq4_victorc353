@@ -1,1 +1,1 @@
-# Ivory Info by RESTful Rhinos
+# The Keratin Chronicle by RESTful Rhinos
