@@ -7,3 +7,9 @@ brianL, victorC, dannyM, marcoQ -- 2024-11-26 10:58
 
 brianL, victorC, dannyM, marcoQ -- 2024-11-26 21:15
 * Finished the design document
+
+victorC -- 2024-12-02 11:47
+* Made minor changes to design document by rephrasing for clarification
+
+marcoQ -- 2024-12-02 18:08
+* Added the heading to the readme.
