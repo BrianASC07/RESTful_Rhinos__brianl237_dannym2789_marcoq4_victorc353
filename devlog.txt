@@ -13,3 +13,6 @@ victorC -- 2024-12-02 11:47
 
 marcoQ -- 2024-12-02 18:08
 * Added the heading to the readme.
+
+brianL -- 2024-12-02 20:21
+* Added roster and project description to the readme.
