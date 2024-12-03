@@ -2,8 +2,11 @@
 
 # Roster:
 **Brian Liu**: Project Manager, Backend + Flask, Implement Calendarific API
+
 **Victor Casado**: Backend + Databases, Implement Financial Modeling Prep API
+
 **Danny Mok**: Database Engineer, Implement NYT API
+
 **Marco Quintero**: Frontend (HTML + CSS + Tailwind), Implement Open Weather Map API
 
 # Project Description:
