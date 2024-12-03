@@ -16,3 +16,6 @@ marcoQ -- 2024-12-02 18:08
 
 brianL -- 2024-12-02 20:21
 * Added roster and project description to the readme.
+
+brianL, victorC, dannyM, marcoQ -- 2024-12-03 11:13
+* Updated keys/readme with key procuring info for all APIs
