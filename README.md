@@ -37,10 +37,11 @@ This website aims to provide personalized and real time information to the userâ
 
 **Getting API Keys**
 
-1. a
-2. b
-3. c
-4. d
+1. Financial Modeling Prep API
+2. Calendarific
+3. NYT
+4. Open Weather
+5. Geocoding
 
 
 # Launch Codes
