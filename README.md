@@ -35,6 +35,13 @@ This website aims to provide personalized and real time information to the userâ
 
         pip install -r RESTful_Rhinos__brianl237_dannym2789_marcoq4_victorc353/requirements.txt
 
+**Getting API Keys**
+
+1. a
+2. b
+3. c
+4. d
+
 
 # Launch Codes
 1. Activate the virtual environment from the install guide if not activated already
