@@ -2,4 +2,4 @@ Financial Modeling Prep API key in key_FMP.txt to be used for stock prices and d
 Calendarific API key in key_Calendarific.txt used to displays list of holidays based on country
 NYT API key in key_NYT.txt used to display articles by user preferences
 Open Weather Map API key in key_Open_Weather_Map.txt used to display forecasts, current weather, and alerts based on city
-Geocoding API key in key_Open_Weather_Map.txt for ease of use by getting geolocation based on city
+Geocoding API key in key_Open_Weather_Map.txt for getting geolocation based on city (working in tandem with OWP API)
