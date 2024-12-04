@@ -51,7 +51,15 @@ This website aims to provide personalized and real time information to the userâ
    4. Copy the key
    5. Paste it into the [key_Calendarific.txt](keys/key_Calendarific.txt) file in the [keys](keys/) directory
 4. NYT
-5. Open Weather
+   1. Navigate to [homepage](https://developer.nytimes.com/)
+   2. Click on Sign In, located in the top right corner. If you already have an account, put in your credentials. Otherwise, make a new account.
+   3. Click on your username in the top right corner. In the dropdown that opens, click on Apps. Alternatively, refer to this [link](https://developer.nytimes.com/my-apps)
+   4. Press new apps
+   5. Make an app name and description. Enable the Archive API, Article Search API, and Most Popular API.
+   6. Save your API.
+   7. Access your app again and copy the API key.
+   8. Paste it into the [key_NYT.txt](keys/key_NYT.txt) file in the [keys](keys/) directory
+6. Open Weather
    1. Open the [Pricing Page](https://openweathermap.org/price) on Open Weather Map's official website
    2. Scroll down to the section titled "Current weather and forecasts collection" and click "Get API Key" under the "Free" column
    3. Sign up by creating a username and password using a valid email. Email verification is required.
