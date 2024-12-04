@@ -52,6 +52,11 @@ This website aims to provide personalized and real time information to the userâ
    5. Paste it into the [key_Calendarific.txt](keys/key_Calendarific.txt) file in the [keys](keys/) directory
 4. NYT
 5. Open Weather
+   1. Open the [Pricing Page](https://openweathermap.org/price) on Open Weather Map's official website
+   2. Scroll down to the section titled "Current weather and forecasts collection" and click "Get API Key" under the "Free" column
+   3. Sign up by creating a username and password using a valid email. Email verification is required.
+   4. Once in the website's home page, click the section titled "API Keys" in the lower level navbar.
+   5. The key should have already been generated but if not, cick "Generate" and the key will appear shortly.
 6. Geocoding
 
 
