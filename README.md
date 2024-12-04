@@ -43,7 +43,7 @@ This website aims to provide personalized and real time information to the userâ
    3. Follow the instructions to sign up
    4. Navigate to the [user dashboard](https://site.financialmodelingprep.com/developer/docs/dashboard)
    5. Copy the Key
-   6. Paste it into the [key_FMP.txt](keys/key_FMP.txt) file in the keys directory
+   6. Paste it into the [key_FMP.txt](keys/key_FMP.txt) file in the [keys](keys/) directory
 2. Calendarific
 3. NYT
 4. Open Weather
