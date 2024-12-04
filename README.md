@@ -33,14 +33,14 @@ This website aims to provide personalized and real time information to the userâ
 
 3. In your terminal, run the command
 
-        pip install -r Bug_Busters__victorc353_ethans175_marcoq4_qianjunz/requirements.txt
+        pip install -r RESTful_Rhinos__brianl237_dannym2789_marcoq4_victorc353/requirements.txt
 
 
 # Launch Codes
 1. Activate the virtual environment from the install guide if not activated already
 2. Change directory into the app folder
 
-        cd Bug_Busters__victorc353_ethans175_marcoq4_qianjunz/app
+        cd RESTful_Rhinos__brianl237_dannym2789_marcoq4_victorc353/app
 
 
 3. Run the App:
