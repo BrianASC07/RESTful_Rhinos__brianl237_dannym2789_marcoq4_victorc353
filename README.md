@@ -57,7 +57,6 @@ This website aims to provide personalized and real time information to the userâ
    3. Sign up by creating a username and password using a valid email. Email verification is required.
    4. Once in the website's home page, click the section titled "API Keys" in the lower level navbar.
    5. The key should have already been generated but if not, cick "Generate" and the key will appear shortly.
-6. Geocoding
 
 
 # Launch Codes
