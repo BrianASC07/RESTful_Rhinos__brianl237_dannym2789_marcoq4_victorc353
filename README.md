@@ -49,7 +49,7 @@ This website aims to provide personalized and real time information to the userâ
    2. Signup or login with email or GitHub account.
    3. Head to your [account dashboard](https://calendarific.com/account/dashboard) where your key will be generated.
    4. Copy the key
-   5. Paste it into the [key_FMP.txt](keys/key_Calendarific.txt) file in the [keys](keys/) directory
+   5. Paste it into the [key_Calendarific.txt](keys/key_Calendarific.txt) file in the [keys](keys/) directory
 4. NYT
 5. Open Weather
 6. Geocoding
