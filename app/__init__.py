@@ -8,13 +8,13 @@ Open_Weather_Map_key = "";
 NYT_key = "";
 Calendarific_key = "";
 try:
-    FMP = open(".\..\keys\key_FMP.txt", "r");
+    FMP = open("../keys/key_FMP.txt", "r");
     FMP_key = FMP.read();
-    NYT = open(".\..\keys\key_NYT.txt", "r");
+    NYT = open("../keys/key_NYT.txt", "r");
     NYT_key = FMP.read();
-    Calendarific = open(".\..\keys\key_Calendarific.txt", "r");
+    Calendarific = open("../keys/key_Calendarific.txt", "r");
     Calendarific_key = FMP.read();
-    Open_Weather_Map = open(".\..\keys\key_Open_Weather_Map.txt", "r");
+    Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r");
     Open_Weather_Map_key = FMP.read();
 except:
     print("API KEYS MISSING");
