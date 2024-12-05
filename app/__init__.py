@@ -7,7 +7,7 @@ FMP_key = "";
 Open_Weather_Map_key = "";
 NYT_key = "";
 Calendarific_key = "";
-try{
+try:
     FMP = open(".\..\keys\key_FMP.txt", "r");
     FMP_key = FMP.read();
     NYT = open(".\..\keys\key_NYT.txt", "r");
@@ -16,22 +16,23 @@ try{
     Calendarific_key = FMP.read();
     Open_Weather_Map = open(".\..\keys\key_Open_Weather_Map.txt", "r");
     Open_Weather_Map_key = FMP.read();
-}
-except{
+except:
     print("API KEYS MISSING");
     keys_missing = True;
-}
-if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_key == ""){
+
+
+if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_key == ""):
     print("API KEYS MISSING");
     keys_missing = True;
-}
+
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
 ##########################################
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if(keys_missing){}//do sm
+    if(keys_missing): #do sm
+        x = 2
     if request.method == 'POST':
         type = request.form.get("type")
         if (type == "loginbutton"):
