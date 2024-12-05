@@ -19,3 +19,6 @@ brianL -- 2024-12-02 20:21
 
 brianL, victorC, dannyM, marcoQ -- 2024-12-03 11:13
 * Updated keys/readme with key procuring info for all APIs
+
+brianL, victorC, dannyM, marcoQ -- 2024-12-04 10:40
+* Updated readme with launch codes and API key generation.
