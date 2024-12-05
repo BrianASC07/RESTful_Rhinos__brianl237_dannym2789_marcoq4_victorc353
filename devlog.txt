@@ -22,3 +22,9 @@ brianL, victorC, dannyM, marcoQ -- 2024-12-03 11:13
 
 brianL, victorC, dannyM, marcoQ -- 2024-12-04 10:40
 * Updated readme with launch codes and API key generation.
+
+brianL, victorC, dannyM, marcoQ -- 2024-12-04 10:40
+* Updated readme with launch codes and API key generation.
+
+brianL -- 2024-12-04 10:30
+* Merged working app
