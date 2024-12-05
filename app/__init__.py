@@ -17,7 +17,7 @@ try:
     Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r");
     Open_Weather_Map_key = FMP.read();
 except:
-    print("API KEYS MISSING");
+    print("API KEY FILES MISSING");
     keys_missing = True;
 
 
