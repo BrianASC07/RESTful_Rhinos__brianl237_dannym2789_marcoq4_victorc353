@@ -28,3 +28,9 @@ brianL, victorC, dannyM, marcoQ -- 2024-12-04 10:40
 
 brianL -- 2024-12-04 10:30
 * Merged working app and updated requirements.txt with necessary packages.
+
+dannyM -- 2024-12-06 10:21
+* Added database python file
+
+victorC -- 2024-12-06 10:38
+* Fixed mechanism to load keys into python program from files
