@@ -29,12 +29,11 @@ except:
 
 
 if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_key == ""):
-    print("KEYS MISSING:")
+    print("API KEYS MISSING:")
     print("FMP: " + FMP_key)
     print("OWM: " + Open_Weather_Map_key)
     print("NYT: " + NYT_key)
     print("CAL: " + Calendarific_key)
-    print("API KEYS MISSING");
     keys_missing = True;
 
 app = Flask(__name__)
