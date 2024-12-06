@@ -11,12 +11,9 @@ api_key = file.read().strip()
 @app.route("/")
 def main():
     with urllib.request.urlopen("http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=" + api_key) as response:
-        '''html = response.read() #reads the page's source code
-        print(html)
-        data = json.loads(html) #converts the page's source code into a python dictionary'''
         coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
         #print(data)
-    with urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?{coords["lat"]}=&{coords["lon"]}=&appid=" + api_key) as response:
+    with urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?{coords[0]["lat"]}=&{coords[0]["lon"]}=&appid=" + api_key) as response:
         data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
         #print(data)
     #print(coords["lat"])
