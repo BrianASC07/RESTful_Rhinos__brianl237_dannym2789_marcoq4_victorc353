@@ -17,12 +17,11 @@ def main():
         coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
         #print(data)
     with urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?{coords["lat"]}=&{coords["lon"]}=&appid=" + api_key) as response:
-        '''html = response.read() #reads the page's source code
-        print(html)
-        data = json.loads(html) #converts the page's source code into a python dictionary'''
         data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
         #print(data)
-    return render_template('main.html', url=data["hdurl"], explanation=data["explanation"])
+    #print(coords["lat"])
+    #print(coords[0])
+    return render_template('OWM_test.html', lat=coords[0]["lat"], lon=coords[0]["lon"], country=coords[0]["country"], state = coords[0]["state"])
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
