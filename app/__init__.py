@@ -10,18 +10,26 @@ Calendarific_key = "";
 try:
     FMP = open("../keys/key_FMP.txt", "r");
     FMP_key = FMP.read();
+    print("FMP KEY LOADED")
+
     NYT = open("../keys/key_NYT.txt", "r");
-    NYT_key = FMP.read();
+    NYT_key = NYT.read();
+    print("NYT KEY LOADED")
+
     Calendarific = open("../keys/key_Calendarific.txt", "r");
-    Calendarific_key = FMP.read();
+    Calendarific_key = Calendarific.read();
+    print("CALENDARIFIC KEY LOADED")
+
     Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r");
-    Open_Weather_Map_key = FMP.read();
+    Open_Weather_Map_key = Open_Weather_Map.read();
+    print("OPEN WEATHER MAP LOADED \n")
 except:
     print("API KEY FILES MISSING");
     keys_missing = True;
 
 
 if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_key == ""):
+    print("KEYS MISSING:")
     print("FMP: " + FMP_key)
     print("OWM: " + Open_Weather_Map_key)
     print("NYT: " + NYT_key)
