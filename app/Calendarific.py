@@ -20,14 +20,21 @@ requesturl = urllib.request.Request(url=url, headers=headers) # from https://www
 
 @app.route("/")
 def main():
-    with urllib.request.urlopen(requesturl) as response:
-        data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
-        list = []
-        for holiday in data.get("response").get("holidays"):
-            list.append(holiday.get("name"))
-    return render_template('Calendarific_test.html', list=list)
+    try:
+        with urllib.request.urlopen(requesturl) as response:
+            if data.get("meta").get("code") == 200: #checks if the api response code is 200 (everything works)
+                data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
+                list = []
+                for holiday in data.get("response").get("holidays"):
+                    list.append(holiday.get("name"))
+                return render_template('Calendarific_test.html', list=list)
+            else: #fallback for if the response code isn't 200
+                return render_template('Calendarific_test.html', list="Sorry, the API is currently unavailable")
 
-if __name__ == "__main__": #false if this file imported as module
-    #enable debugging, auto-restarting of server when this file is modified
+    except: # catches all other errors
+        print("CALENDARIFIC API UNAVAILABLE")
+        return render_template('Calendarific_test.html', list="Sorry, the API is currently unavailable")
+
+if __name__ == "__main__": 
     app.debug = True
     app.run()
