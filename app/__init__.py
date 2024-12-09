@@ -1,32 +1,31 @@
 from flask import Flask, render_template, url_for, session, request, redirect
 import os, json, urllib.request
 
-keys_missing = False;
+keys_missing = False
 
-FMP_key = "";
-Open_Weather_Map_key = "";
-NYT_key = "";
-Calendarific_key = "";
+FMP_key = ""
+Open_Weather_Map_key = ""
+NYT_key = ""
+Calendarific_key = ""
 try:
-    FMP = open("../keys/key_FMP.txt", "r");
-    FMP_key = FMP.read();
+    FMP = open("../keys/key_FMP.txt", "r")
+    FMP_key = FMP.read()
     print("FMP KEY LOADED")
 
-    NYT = open("../keys/key_NYT.txt", "r");
-    NYT_key = NYT.read();
+    NYT = open("../keys/key_NYT.txt", "r")
+    NYT_key = NYT.read()
     print("NYT KEY LOADED")
 
-    Calendarific = open("../keys/key_Calendarific.txt", "r");
-    Calendarific_key = Calendarific.read();
+    Calendarific = open("../keys/key_Calendarific.txt", "r")
+    Calendarific_key = Calendarific.read()
     print("CALENDARIFIC KEY LOADED")
 
-    Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r");
-    Open_Weather_Map_key = Open_Weather_Map.read();
+    Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r")
+    Open_Weather_Map_key = Open_Weather_Map.read()
     print("OPEN WEATHER MAP LOADED \n")
 except:
-    print("API KEY FILES MISSING");
-    keys_missing = True;
-
+    print("API KEY FILES MISSING")
+    keys_missing = True
 
 if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_key == ""):
     print("API KEYS MISSING:")
@@ -34,7 +33,7 @@ if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_
     print("OWM: " + Open_Weather_Map_key)
     print("NYT: " + NYT_key)
     print("CAL: " + Calendarific_key)
-    keys_missing = True;
+    keys_missing = True
 
 app = Flask(__name__)
 
