@@ -34,3 +34,6 @@ dannyM -- 2024-12-06 10:21
 
 victorC -- 2024-12-06 10:38
 * Fixed mechanism to load keys into python program from files
+
+victorC -- 2024-12-08 21:00
+* Created system to call FMP key (the key I am assigned to handle) and handle errors without crashing in separate FMP.py file
