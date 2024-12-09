@@ -26,20 +26,22 @@ def createTables():
             CREATE TABLE IF NOT EXISTS weather {
                 id INTEGER PRIMARY KEY,
             }
-        ''') # will need to add all stocks later with API calls
+        ''') # will need to add all weather later with API calls
     
     #News Preferences Info
     c.execute('''
             CREATE TABLE IF NOT EXISTS news {
                 id INTEGER PRIMARY KEY,
             }
-        ''') # will need to add all stocks later with API calls
+        ''') # will need to add all news later with API calls
     
     #Holiday Regions Info
     c.execute('''
             CREATE TABLE IF NOT EXISTS holidays {
                 id INTEGER PRIMARY KEY,
             }
-        ''') # will need to add all stocks later with API calls
+        ''') # will need to add all holidays later with API calls
+    
+
     
     
