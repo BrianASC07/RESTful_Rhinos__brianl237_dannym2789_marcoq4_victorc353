@@ -35,6 +35,10 @@ if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_
     print("CAL: " + Calendarific_key)
     keys_missing = True
 
+
+from APIModule import Calendarific
+
+
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
@@ -56,9 +60,10 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
+    holidaylist = Calendarific.getInfo(2024,12,'us','ny')
     if 'username' in session:
         return render_template('home.html', loggedin=True)
-    return render_template('home.html', loggedin=False)
+    return render_template('home.html', loggedin=False, list=holidaylist)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
 def login():
