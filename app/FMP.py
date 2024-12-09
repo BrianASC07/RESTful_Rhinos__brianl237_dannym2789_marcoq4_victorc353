@@ -1,10 +1,3 @@
-# Kyle Lee, Jessica Yu, Vedant Kothari, Will Nzeuton
-# Team datTopherPack
-# SoftDev
-# p01
-# 2024-12-07
-
-
 import urllib.request
 from urllib.request import Request
 from urllib.request import urlopen
