@@ -44,3 +44,6 @@ brianL -- 2024-12-08 22:30
 dannyM -- 2024-12-09 10:28
 * Created NYT.py
 * Developed db.py more
+
+marcoQ -- 2024-12-09 10:44
+* Call Open Weather Map API but need to add system that handles crashes when API key file invalid or unavailable
