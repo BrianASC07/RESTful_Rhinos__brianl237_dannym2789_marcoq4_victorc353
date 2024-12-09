@@ -10,7 +10,7 @@ import os
 #Just use keys list to access api_key
 #We can try to handle the responses with other functions, these just get the response
 def FMP():
-   url = f"https://financialmodelingprep.com/api/v3/search?query=AA&apikey="
+   url = f"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
    api_key = FMP.read();
    url = url + api_key
