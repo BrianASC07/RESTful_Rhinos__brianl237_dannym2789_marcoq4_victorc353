@@ -1,5 +1,7 @@
+import os
+import json
+import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
-import os, json, urllib.request
 
 from APIModule import Calendarific, OWM, FMP
 #KEY TESTING
