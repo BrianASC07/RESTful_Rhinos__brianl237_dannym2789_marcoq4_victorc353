@@ -50,3 +50,6 @@ marcoQ -- 2024-12-09 10:44
 
 marcoQ -- 2024-12-09 22:24
 * Created txt file for all cities that will be listed in user preferences for weather
+
+brianL -- 2024-12-09 10:44
+* Mereged updated API system with folder and import systems to keep all the API files
