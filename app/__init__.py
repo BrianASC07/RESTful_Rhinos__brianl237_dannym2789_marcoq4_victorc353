@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, session, request, redirect
 import os, json, urllib.request
 
+from APIModule import Calendarific, OWM, FMP
+#KEY TESTING
 keys_missing = False
 
 FMP_key = ""
@@ -41,7 +43,7 @@ app.secret_key = os.urandom(32)
 ##########################################
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if(keys_missing): #do sm
+    if(Calendarific.getInfo == "Sorry, an error occured"): #do sm #update later for all the other APIs
         x = 2
     if request.method == 'POST':
         type = request.form.get("type")
@@ -56,9 +58,10 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
+    holidaylist = Calendarific.getInfo(2024,12,'us','ny')
     if 'username' in session:
         return render_template('home.html', loggedin=True)
-    return render_template('home.html', loggedin=False)
+    return render_template('home.html', loggedin=False, list=holidaylist)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
 def login():
