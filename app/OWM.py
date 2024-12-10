@@ -29,7 +29,7 @@ def main():
             #print(coords[0])
     return render_template('OWM_test.html', lat=coords[0]["lat"], lon=coords[0]["lon"], country=coords[0]["country"], state = coords[0]["state"], temp = data["main"]["temp"], main = data["weather"][0]["main"], description = data["weather"][0]["description"])
     except:
-        preturn render_template('OWM_errorpage.html')
+        preturn render_template('OWM_errorpage.html', errorMessage = "Open Weather MAp API unavailables")
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
