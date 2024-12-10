@@ -2,7 +2,6 @@ import urllib.request
 import json
 import os
 
-
 def getInfo(curr_year, curr_month, country, state):
     try:
         file = open("../keys/key_Calendarific.txt", "r")
@@ -24,5 +23,4 @@ def getInfo(curr_year, curr_month, country, state):
             else: #fallback for if the response code isn't 200
                 return "Sorry, the API is currently unavailable"
     except: # catches all other errors
-        print("CALENDARIFIC API UNAVAILABLE")
         return "Sorry, an error occured"
