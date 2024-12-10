@@ -7,20 +7,52 @@ import os
 
 
 
-#Just use keys list to access api_key
-#We can try to handle the responses with other functions, these just get the response
-def FMP():
+def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists
    url = f"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
    api_key = FMP.read();
-   url = url + api_key
    try:
-       a = urllib.request.urlopen(url)
-       if a.getcode() == 200:
-           return "Success"
-       else:
-           print(f'Failed to retrieve data {response.status_code}')
-   except requests.exceptions.RequestException as e:
+       with urllib.request.urlopen(url + api_key) as response:
+          if response.getcode() == 200:
+              html = response.read()
+              str = html.decode('utf-8')
+              data = json.loads(str)
+              returner = {"a", "b"}
+              returner.remove("a")
+              returner.remove("b")
+              for i in data:
+                  returner.add(i['symbol'])
+              return returner
+          else:
+              print(f'Failed to retrieve data {response.status_code}')
+   except Exception as e:
        return "Failed"
 
-print(FMP())
+def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists
+   url = f"https://financialmodelingprep.com/api/v3/dowjones_constituent?apikey="
+   FMP = open("../keys/key_FMP.txt", "r");
+   api_key = FMP.read();
+   try:
+       with urllib.request.urlopen(url + api_key) as response:
+          if response.getcode() == 200:
+              html = response.read()
+              str = html.decode('utf-8')
+              data = json.loads(str)
+              returner = {"a", "b"}
+              returner.remove("a")
+              returner.remove("b")
+              for i in data:
+                  returner.add(i['symbol'])
+              return returner
+          else:
+              print(f'Failed to retrieve data {response.status_code}')
+   except Exception as e:
+       return "Failed"
+
+def getCompanySymbolList():
+    #only function that should be called be app
+    return getNasdaqList().union(getDowJonesList())
+
+#print(getNasdaqList())
+#print(getDowJonesList())
+print(getCompanySymbolList())
