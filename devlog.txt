@@ -38,6 +38,10 @@ victorC -- 2024-12-06 10:38
 victorC -- 2024-12-08 21:00
 * Created system to call FMP key (the key I am assigned to handle) and handle errors without crashing in separate FMP.py file
 
+victorC -- 2024-12-10 10:50
+* Created system to get a list of stocks for the web app
+* Created system to get historical data for a stock in the list
+
 brianL -- 2024-12-08 22:30
 * Created system to call Calendarific key (the key I am assigned to handle) and handle errors without crashing in separate Calendarific.py file
 
