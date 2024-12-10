@@ -15,33 +15,38 @@ def createTables():
         ''')
     
     #Stocks Info
-    c.execute('''
-            CREATE TABLE IF NOT EXISTS stocks {
-                id INTEGER PRIMARY KEY,
-            }
-        ''') # will need to add all stocks later with API calls
+    c.execute('CREATE TABLE IF NOT EXISTS stocks {id INTEGER PRIMARY KEY,}')
+    # will need to add all stocks later with API calls
     
     #Weather Regions Info
-    c.execute('''
-            CREATE TABLE IF NOT EXISTS weather {
-                id INTEGER PRIMARY KEY,
-            }
-        ''') # will need to add all weather later with API calls
+    c.execute('CREATE TABLE IF NOT EXISTS weather {id INTEGER PRIMARY KEY,}')
+    # will need to add all weather later with API calls
     
     #News Preferences Info
-    c.execute('''
-            CREATE TABLE IF NOT EXISTS news {
-                id INTEGER PRIMARY KEY,
-            }
-        ''') # will need to add all news later with API calls
+    c.execute('CREATE TABLE IF NOT EXISTS news {id INTEGER PRIMARY KEY,}')
+    # will need to add all news later with API calls
     
     #Holiday Regions Info
-    c.execute('''
-            CREATE TABLE IF NOT EXISTS holidays {
-                id INTEGER PRIMARY KEY,
-            }
-        ''') # will need to add all holidays later with API calls
+    c.execute('CREATE TABLE IF NOT EXISTS holidays {id INTEGER PRIMARY KEY,}')
+    # will need to add all holidays later with API calls
     
+    db.commit()
+    db.close()
 
-    
-    
+def addColumn(table, colname):
+    db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
+    c = db.cursor()
+    c.execute('ALTER TABLE ? ADD ? TEXT', (table, column))
+    db.commit()
+    db.close()
+
+'''
+def fxnTemplate():
+    db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
+    c = db.cursor()
+    c.execute('''
+        
+        ''')
+    db.commit()
+    db.close()
+'''
