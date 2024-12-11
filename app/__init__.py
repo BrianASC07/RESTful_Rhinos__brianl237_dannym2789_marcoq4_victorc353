@@ -2,8 +2,7 @@ import os
 import json
 import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
-
-from APIModule import Calendarific, OWM, FMP
+from APIModule import OWM, FMP, Calendarific
 #KEY TESTING
 keys_missing = False
 
@@ -20,7 +19,7 @@ try:
     NYT_key = NYT.read()
     print("NYT KEY LOADED")
 
-    Calendarific = open("../keys/key_Calendarific.txt", "r")
+    Calendar = open("../keys/key_Calendarific.txt", "r")
     Calendarific_key = Calendarific.read()
     print("CALENDARIFIC KEY LOADED")
 
@@ -63,7 +62,7 @@ def home():
     holidaylist = Calendarific.getInfo(2024,12,'us','ny')
     if 'username' in session:
         return render_template('home.html', loggedin=True)
-    return render_template('home.html', loggedin=False, list=holidaylist)
+    return render_template('home.html', loggedin=False, list=holidaylist[0])
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
 def login():
