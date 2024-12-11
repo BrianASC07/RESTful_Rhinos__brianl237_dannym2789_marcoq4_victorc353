@@ -5,7 +5,6 @@ from flask import Flask, render_template, url_for, session, request, redirect
 from APIModule import OWM, FMP, Calendarific
 #KEY TESTING
 keys_missing = False
-
 FMP_key = ""
 Open_Weather_Map_key = ""
 NYT_key = ""
@@ -20,7 +19,7 @@ try:
     print("NYT KEY LOADED")
 
     Calendar = open("../keys/key_Calendarific.txt", "r")
-    Calendarific_key = Calendarific.read()
+    Calendarific_key = Calendar.read()
     print("CALENDARIFIC KEY LOADED")
 
     Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r")
@@ -61,8 +60,8 @@ def home():
     #IF LOGGED IN
     holidaylist = Calendarific.getInfo(2024,12,'us','ny')
     if 'username' in session:
-        return render_template('home.html', loggedin=True)
-    return render_template('home.html', loggedin=False, list=holidaylist[0])
+        return render_template('home.html', loggedin=True, Calendarific_Info=holidaylist[0])
+    return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
 def login():

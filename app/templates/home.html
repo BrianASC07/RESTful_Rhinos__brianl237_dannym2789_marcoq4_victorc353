@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
@@ -17,6 +18,13 @@
         <form method="POST">
             <button type="submit" name="type" value="logoutbutton">Logout</button>
         </form>
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div class="md:flex">
+            <div class="p-8">
+              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{Calendarific_Info}}</p>
+            </div>
+          </div>
+        </div>
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
         {% else %}
             <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
@@ -29,7 +37,6 @@
                 <button type="submit" name="type" value="signupbutton">Sign Up</button>
             </form>
         {% endif %}
-        {{list}}
         <br><br><br>
   </body>
 </html>
