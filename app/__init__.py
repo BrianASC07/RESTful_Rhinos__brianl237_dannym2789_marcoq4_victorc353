@@ -44,8 +44,8 @@ app.secret_key = os.urandom(32)
 ##########################################
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if(Calendarific.getInfo == "Sorry, an error occured"): #do sm #update later for all the other APIs
-        x = 2
+    if(keys_missing): #do sm #update later for all the other APIs
+        return render_template("wrong.html")
     if request.method == 'POST':
         type = request.form.get("type")
         if (type == "loginbutton"):
