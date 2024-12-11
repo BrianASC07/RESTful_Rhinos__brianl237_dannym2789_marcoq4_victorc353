@@ -25,7 +25,7 @@ def getHistoricalStockData(stockSymbol): #maybe expand to diff time frames in fu
     except Exception as e:
        return "Failed"
 
-print(getHistoricalStockData('AAPL'))
+#print(getHistoricalStockData('AAPL'))
 
 def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists
    url = f"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey="
