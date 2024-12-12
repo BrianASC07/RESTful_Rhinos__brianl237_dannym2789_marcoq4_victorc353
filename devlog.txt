@@ -73,3 +73,6 @@ victorC -- 2024-12-12 11:00
 victorC -- 2024-12-12 17:14
 * Revised db structure a tiny bit more
 * Made adding a user add rows to userData, stockprefs, and newsprefs
+
+victorC -- 2024-12-12 18:15
+* Made adding prefs function

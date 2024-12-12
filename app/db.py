@@ -3,7 +3,9 @@ import sqlite3, csv, APIModule.FMP
 def getNewsSections():
     return ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion",
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
-    "us", "world"]
+    "us", "world"] #to minimize api calls
+def getStockList():
+    ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'ORLY', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'ON', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
 def createTables():
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -38,7 +40,7 @@ def createTables():
     c.execute(executable)
 
     #Stock Preferences Info
-    stocks = APIModule.FMP.getCompanySymbolList()
+    stocks = getStockList()
 
     executable = "CREATE TABLE IF NOT EXISTS stockPreferences (userID INTEGER, "
     for i in stocks:
@@ -93,7 +95,6 @@ def createUser(username, password):
     except Exception as e:
         print(e)
         return False
-
 def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSections are lists of strings; if no city, pass "", if no stocks, sections, pass []
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -155,6 +156,7 @@ def printData(tableName):
     print(string)
     for row in c:
         print(row)
+print(APIModule.FMP.getCompanySymbolList())
 
 createTables()
 createUser("victor", "casado")

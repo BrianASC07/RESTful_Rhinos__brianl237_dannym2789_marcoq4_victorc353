@@ -27,7 +27,7 @@ def getHistoricalStockData(stockSymbol): #maybe expand to diff time frames in fu
 
 #print(getHistoricalStockData('AAPL'))
 
-def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists
+def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists do not call tho!!!
    url = f"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
    api_key = FMP.read();
@@ -48,7 +48,7 @@ def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and
    except Exception as e:
        return "Failed"
 
-def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists
+def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists do not call tho!!!
    url = f"https://financialmodelingprep.com/api/v3/dowjones_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
    api_key = FMP.read();
@@ -69,8 +69,7 @@ def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones a
    except Exception as e:
        return "Failed"
 
-def getCompanySymbolList():
-    #only function that should be called by app
+def getCompanySymbolList(): #do not call
     return getNasdaqList().union(getDowJonesList()) #NOTICE that this returns a set, not a list
 
 #print(getNasdaqList())
