@@ -70,7 +70,7 @@ def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones a
        return "Failed"
 
 def getCompanySymbolList():
-    #only function that should be called be app
+    #only function that should be called by app
     return getNasdaqList().union(getDowJonesList()) #NOTICE that this returns a set, not a list
 
 #print(getNasdaqList())

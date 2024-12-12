@@ -1,14 +1,17 @@
 import sqlite3, csv, APIModule.FMP
 
-# Create Tables
+def getNewsSections():
+    return ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion",
+        "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
+    "us", "world"]
 def createTables():
-    db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
+    db = sqlite3.connect("RESTables.db")
     c = db.cursor()
 
     #User Info
     c.execute('''
             CREATE TABLE IF NOT EXISTS userData (
-                userid INTEGER PRIMARY KEY,
+                userID INTEGER PRIMARY KEY,
                 username TEXT UNIQUE NOT NULL,
                 password TEXT NOT NULL,
                 city TEXT)
@@ -17,7 +20,6 @@ def createTables():
     #Stocks Info
     c.execute('''
             CREATE TABLE IF NOT EXISTS basicStockInfo (
-                stockid INTEGER PRIMARY KEY,
                 stockname TEXT NOT NULL,
                 stocksymbol UNIQUE NOT NULL
             )
@@ -25,9 +27,7 @@ def createTables():
 
 
     #News Preferences Info
-    sections = ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion",
-        "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
-    "us", "world"]
+    sections = getNewsSections()
 
     executable = "CREATE TABLE IF NOT EXISTS newsContentPreferences (userID INTEGER, "
     for i in sections:
@@ -51,7 +51,6 @@ def createTables():
 
     db.commit()
     db.close()
-
 def createUser(username, password):
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -95,19 +94,79 @@ def createUser(username, password):
         print(e)
         return False
 
-#def addPrefs(userID, city, ):
-
-
-def printData(table):
+def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSections are lists of strings; if no city, pass "", if no stocks, sections, pass []
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
-    c.execute(f"SELECT * FROM {table}")
-    print(c.fetchall())
+    query = f"UPDATE userData SET city = '{city}' WHERE userID = {userID}" #this is safe as city comes from a dropdown and not user text input
+    c.execute(query)
+    #print(query)
+
+
+    query = "SELECT COUNT(*) FROM pragma_table_info('stockPreferences')"
+    c.execute(query)
+    result = c.fetchone()
+    stockPref_column_count = result[0]
+
+    c.execute(f"DELETE FROM stockPreferences WHERE userID = {userID}")
+
+    executable = f"INSERT INTO stockPreferences VALUES ({userID}, "
+    for i in range(stockPref_column_count - 1):
+        executable = executable + "0, " #row of all zeros to reset prefs
+    executable = executable[:-2] + ")"
+    c.execute(executable)
+
+    executable = "UPDATE stockPreferences SET "
+    for i in stockSymbols:
+        executable = executable + i + " = 1, "
+    executable = executable[:-2] + f" WHERE userID = {userID}"
+    #print(executable)
+    c.execute(executable)
+
+
+    query = "SELECT COUNT(*) FROM pragma_table_info('newsContentPreferences')"
+    c.execute(query)
+    result = c.fetchone()
+    newsPref_column_count = result[0]
+
+    c.execute(f"DELETE FROM newsContentPreferences WHERE userID = {userID}")
+
+    executable = f"INSERT INTO newsContentPreferences VALUES ({userID}, "
+    for i in range(newsPref_column_count - 1):
+        executable = executable + "0, " #row of all zeros to reset prefs
+    executable = executable[:-2] + ")"
+    c.execute(executable)
+
+    executable = "UPDATE newsContentPreferences SET "
+    for i in newsSections:
+        executable = executable + i + " = 1, "
+    executable = executable[:-2] + f" WHERE userID = {userID}"
+    #print(executable)
+    c.execute(executable)
+
+    db.commit()
+    db.close()
+def printData(tableName):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT * FROM {tableName}")
+    string = ""
+    for column in c.description:
+        string = string + column[0] + "  "
+    print(string)
+    for row in c:
+        print(row)
 
 createTables()
 createUser("victor", "casado")
 createUser("brian", "liu")
+addPrefs(0, "NYC", ["AAPL"], ["travel", "books"])
+addPrefs(0, "NYC", ["AAPL"], ["health" ,"books"])
+
+print()
 printData("userData")
+print()
 printData("basicStockInfo")
+print()
 printData("newsContentPreferences")
+print()
 printData("stockPreferences")
