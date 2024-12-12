@@ -3,7 +3,7 @@ import json
 import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
 
-from APIModule import Calendarific, OWM, FMP
+from APIModule import OWM, Calendarific, FMP
 #KEY TESTING
 keys_missing = False
 
@@ -20,8 +20,8 @@ try:
     NYT_key = NYT.read()
     print("NYT KEY LOADED")
 
-    Calendarific = open("../keys/key_Calendarific.txt", "r")
-    Calendarific_key = Calendarific.read()
+    Calendar = open("../keys/key_Calendarific.txt", "r")
+    Calendarific_key = Calendarifickey.read()
     print("CALENDARIFIC KEY LOADED")
 
     Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r")
@@ -60,10 +60,10 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
-    holidaylist = Calendarific.getInfo(2024,12,'us','ny')
+    holidaylist = Calendarific.getInfo('us','ny')
     if 'username' in session:
-        return render_template('home.html', loggedin=True)
-    return render_template('home.html', loggedin=False, list=holidaylist)
+        return render_template('home.html', loggedin=True, list=holidaylist)
+    return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
 def login():

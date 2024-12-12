@@ -17,6 +17,14 @@
         <form method="POST">
             <button type="submit" name="type" value="logoutbutton">Logout</button>
         </form>
+        <p>Holidays in {{list[1]}}</p>
+        <table>
+        {% for holiday in list[2: ] %}
+          <tr>
+            <td>{{ holiday }}</td>
+          </tr>
+        {% endfor %}
+        </table>
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
         {% else %}
             <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
@@ -29,7 +37,6 @@
                 <button type="submit" name="type" value="signupbutton">Sign Up</button>
             </form>
         {% endif %}
-        {{list}}
         <br><br><br>
   </body>
 </html>
