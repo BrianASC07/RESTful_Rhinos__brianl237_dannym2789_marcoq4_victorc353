@@ -64,3 +64,8 @@ brianL -- 2024-12-09 10:44
 victorC -- 2024-12-11 10:28
 * Removed reason website crashed
 * Made website redirect when API keys load improperly
+
+victorC -- 2024-12-12 11:00
+* Revised db structure
+* Made function to add user to db
+* Made function to print db table to assist in debugging
