@@ -5,7 +5,7 @@ def getNewsSections():
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
     "us", "world"] #to minimize api calls
 def getStockList():
-    ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'ORLY', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'ON', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
+    return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'ORLY', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
 def createTables():
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -44,8 +44,7 @@ def createTables():
 
     executable = "CREATE TABLE IF NOT EXISTS stockPreferences (userID INTEGER, "
     for i in stocks:
-        if(not (i == "ON")): #reserved sqlite word
-            executable = executable + str(i) + " INTEGER, " #0 if user doesnt care, 1 if user does (each user is a row)
+        executable = executable + str(i) + " INTEGER, " #0 if user doesnt care, 1 if user does (each user is a row)
 
     executable = executable[:-2] + ")"
 
@@ -156,19 +155,43 @@ def printData(tableName):
     print(string)
     for row in c:
         print(row)
-print(APIModule.FMP.getCompanySymbolList())
+def getUserCity(userID):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT city FROM userData WHERE userID = {userID}")
+    row = c.fetchone()
+    return row[0]
+def getUserStocks(userID):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT * FROM stockPreferences WHERE userID = {userID}")
+    row = c.fetchone() #1st element is uid
+    stocks = getStockList()
+    returner = []
+    for i in range(len(stocks)):
+        if(row[i+1] == 1):
+            returner.append(stocks[i])
+    return returner
+def getUserNewsSections(userID):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT * FROM newsContentPreferences WHERE userID = {userID}")
+    row = c.fetchone() #1st element is uid
+    sections = getNewsSections()
+    returner = []
+    for i in range(len(sections)):
+        if(row[i+1] == 1):
+            returner.append(sections[i])
+    return returner
 
+
+'''
 createTables()
 createUser("victor", "casado")
 createUser("brian", "liu")
-addPrefs(0, "NYC", ["AAPL"], ["travel", "books"])
-addPrefs(0, "NYC", ["AAPL"], ["health" ,"books"])
-
-print()
-printData("userData")
-print()
-printData("basicStockInfo")
-print()
-printData("newsContentPreferences")
-print()
-printData("stockPreferences")
+addPrefs(1, "NYC", ["AAPL"], ["travel", "books"])
+addPrefs(1, "NYC", ["AAPL", "NVDA"], ["health" ,"books"])
+print(getUserCity(1))
+print(getUserStocks(1))
+print(getUserNewsSections(1))
+'''

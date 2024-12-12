@@ -76,3 +76,6 @@ victorC -- 2024-12-12 17:14
 
 victorC -- 2024-12-12 18:15
 * Made adding prefs function
+
+victorC -- 2024-12-12 18:40
+* Made GET methods for DB
