@@ -4,51 +4,53 @@ import sqlite3, csv
 def createTables():
     db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
     c = db.cursor()
-    
+
     #User Info
     c.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS userData (
+                userid INTEGER PRIMARY KEY,
                 username TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL
-            )
-        ''')
-    
+                password TEXT NOT NULL,
+                city TEXT)
+        ''') #note that city can be an empty string
+
     #Stocks Info
     c.execute('''
-            CREATE TABLE IF NOT EXISTS stocks (
-                id INTEGER PRIMARY KEY,
-                stock1 INTEGER DEFAULT 0
+            CREATE TABLE IF NOT EXISTS basicStockInfo (
+                stockid INTEGER PRIMARY KEY,
+                stockname TEXT NOT NULL,
+                stocksymbol UNIQUE NOT NULL
             )
-        ''')
-    # will need to add all stocks later with API calls
-    
-    #Weather Regions Info
-    c.execute('CREATE TABLE IF NOT EXISTS weather (id INTEGER PRIMARY KEY)')
-    # will need to add all weather later with API calls
-    
+        ''')#each stock is a row
+
     #News Preferences Info
-    c.execute('CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY)')
-    # will need to add all news later with API calls
-    
-    #Holiday Regions Info
-    c.execute('CREATE TABLE IF NOT EXISTS holidays (id INTEGER PRIMARY KEY)')
-    # will need to add all holidays later with API calls
-    
+    c.execute('CREATE TABLE IF NOT EXISTS newsContentPreferences (contentType TEXT UNIQUE NOT NULL)')
+
+
     db.commit()
     db.close()
 
 createTables()
 
-def setPref(table, item, value):
-    db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
-    c = db.cursor()
-    try:
-        if (value == 0 or value == 1):
-            c.execute('INSERT INTO (?) (?) VALUES (?)', (table, item, value))
-        else:
-            print("INVALID VALUE")
-    except:
-        print('INVALID TABLE OR ITEM FROM: ' + table + ' ' + item + ' call')
 
-setPref("a","a", 1)
+def createUser(username, password):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    query = "SELECT COUNT(1) FROM userData"
+    c.execute(query)
+    result = c.fetchone()
+    row_count = result[0]
+    try:
+        c.execute('INSERT INTO userData VALUES (?, ?, ?, ?)', (row_count, username, password, ""))
+        db.commit()
+        db.close()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def printData(table):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT * FROM {table}")
+    print(c.fetchall())
