@@ -193,6 +193,13 @@ def isPasswordCorrect(username, password):
     row = c.fetchone()
     db.close()
     return password == row[0]
+def getUserID(username):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT userID FROM userData WHERE username = '{username}'")
+    row = c.fetchone()
+    db.close()
+    return row[0]
 
 '''
 createTables()
@@ -205,4 +212,5 @@ print(getUserStocks(1))
 print(getUserNewsSections(1))
 print(isPasswordCorrect("victor", "casado"))
 print(isPasswordCorrect("brian", "casado"))
+print(getUserID("brian"))
 '''
