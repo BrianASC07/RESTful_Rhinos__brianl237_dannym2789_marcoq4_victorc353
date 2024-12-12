@@ -58,6 +58,7 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
+    #the three variables below are just for testing purposes only. More info should be added.
     holidaylist = Calendarific.getInfo(2024,12,'us','ny')
     nasdaq = FMP.getNasdaqList()
     temp = OWM.getInfo("New_York")
