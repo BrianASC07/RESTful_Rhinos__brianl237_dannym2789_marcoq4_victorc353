@@ -10,12 +10,12 @@ Open_Weather_Map_key = ""
 NYT_key = ""
 Calendarific_key = ""
 try:
-    FMP = open("../keys/key_FMP.txt", "r")
-    FMP_key = FMP.read()
+    Financial = open("../keys/key_FMP.txt", "r")
+    FMP_key = Financial.read()
     print("FMP KEY LOADED")
 
-    NYT = open("../keys/key_NYT.txt", "r")
-    NYT_key = NYT.read()
+    New_York_Times = open("../keys/key_NYT.txt", "r")
+    NYT_key = New_York_Times.read()
     print("NYT KEY LOADED")
 
     Calendar = open("../keys/key_Calendarific.txt", "r")
@@ -59,8 +59,10 @@ def home():
 
     #IF LOGGED IN
     holidaylist = Calendarific.getInfo(2024,12,'us','ny')
+    nasdaq = FMP.getNasdaqList()
+    temp = OWM.getInfo("New_York")
     if 'username' in session:
-        return render_template('home.html', loggedin=True, Calendarific_Info=holidaylist[0])
+        return render_template('home.html', loggedin=True, Calendarific_Info=holidaylist[0], FMP_Info=list(nasdaq)[0], OWM_Info=temp)
     return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])

@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="#">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
 </head>
   <body>
     <h1>Welcome to the Homepage!</h1>
@@ -22,6 +34,20 @@
           <div class="md:flex">
             <div class="p-8">
               <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{Calendarific_Info}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div class="md:flex">
+            <div class="p-8">
+              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{FMP_Info}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div class="md:flex">
+            <div class="p-8">
+              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{OWM_Info}}</p>
             </div>
           </div>
         </div>
