@@ -69,3 +69,7 @@ victorC -- 2024-12-12 11:00
 * Revised db structure
 * Made function to add user to db
 * Made function to print db table to assist in debugging
+
+victorC -- 2024-12-12 17:14
+* Revised db structure a tiny bit more
+* Made adding a user add rows to userData, stockprefs, and newsprefs
