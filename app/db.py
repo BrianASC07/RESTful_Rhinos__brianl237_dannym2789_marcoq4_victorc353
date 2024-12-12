@@ -160,6 +160,7 @@ def getUserCity(userID):
     c = db.cursor()
     c.execute(f"SELECT city FROM userData WHERE userID = {userID}")
     row = c.fetchone()
+    db.close()
     return row[0]
 def getUserStocks(userID):
     db = sqlite3.connect("RESTables.db")
@@ -171,6 +172,7 @@ def getUserStocks(userID):
     for i in range(len(stocks)):
         if(row[i+1] == 1):
             returner.append(stocks[i])
+    db.close()
     return returner
 def getUserNewsSections(userID):
     db = sqlite3.connect("RESTables.db")
@@ -182,8 +184,15 @@ def getUserNewsSections(userID):
     for i in range(len(sections)):
         if(row[i+1] == 1):
             returner.append(sections[i])
+    db.close()
     return returner
-
+def isPasswordCorrect(username, password):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT password FROM userData WHERE username = '{username}'")
+    row = c.fetchone()
+    db.close()
+    return password == row[0]
 
 '''
 createTables()
@@ -194,4 +203,6 @@ addPrefs(1, "NYC", ["AAPL", "NVDA"], ["health" ,"books"])
 print(getUserCity(1))
 print(getUserStocks(1))
 print(getUserNewsSections(1))
+print(isPasswordCorrect("victor", "casado"))
+print(isPasswordCorrect("brian", "casado"))
 '''
