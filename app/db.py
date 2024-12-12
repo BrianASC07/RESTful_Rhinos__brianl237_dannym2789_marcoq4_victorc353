@@ -15,7 +15,12 @@ def createTables():
         ''')
     
     #Stocks Info
-    c.execute('CREATE TABLE IF NOT EXISTS stocks (id INTEGER PRIMARY KEY)')
+    c.execute('''
+            CREATE TABLE IF NOT EXISTS stocks (
+                id INTEGER PRIMARY KEY,
+                stock1 INTEGER DEFAULT 0
+            )
+        ''')
     # will need to add all stocks later with API calls
     
     #Weather Regions Info
@@ -33,13 +38,17 @@ def createTables():
     db.commit()
     db.close()
 
-def addColumn(table, colname):
+createTables()
+
+def setPref(table, item, value):
     db = sqlite3.connect("RESTables.db")#, check_same_thread = False)
     c = db.cursor()
-    c.execute('ALTER TABLE ' + table + ' ADD ' + colname + ' TEXT')
-    db.commit()
-    db.close()
+    try:
+        if (value == 0 or value == 1):
+            c.execute('INSERT INTO (?) (?) VALUES (?)', (table, item, value))
+        else:
+            print("INVALID VALUE")
+    except:
+        print('INVALID TABLE OR ITEM FROM: ' + table + ' ' + item + ' call')
 
-createTables()
-addColumn("stocks", "ooga")
-
+setPref("a","a", 1)
