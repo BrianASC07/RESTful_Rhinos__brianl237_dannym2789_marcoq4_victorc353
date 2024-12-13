@@ -58,12 +58,18 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
-    #the three variables below are just for testing purposes only. More info should be added.
-    holiday_today = "Friday the 13th. OOOOOOOH SPOOOOOKY"
-     = 
-    temp = OWM.getInfo("New_York")
+    #These are templates of what we info needs to be displayed on the home page.
+    today_holiday = f"Friday the 13th. OOOOOOOH SPOOOOOKY"
+    holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
+    today_weather = "Cloudy"
+    temp = "15"
+    stock_name = "Doge Coin"
+    stock_change = "+10000000%"
+    news_title = "Breaking news # 1"
+    news_description = "This is breaking news. The first."
+
     if 'username' in session:
-        return render_template('home.html', loggedin=True, Calendarific_Info=holidaylist[0], FMP_Info=list(nasdaq)[0], OWM_Info=temp)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, stock = stock_name, inc_dec = stock_change, title = news_title, description = news_description)
     return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
