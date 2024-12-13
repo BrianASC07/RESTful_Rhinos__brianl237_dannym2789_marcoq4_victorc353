@@ -83,3 +83,6 @@ victorC -- 2024-12-12 18:40
 brianL -- 2024-12-09 20:57
 * Fixed issues involving the display of error messages for Calendarific
 * Updated __init__.py to implement login and signup functionality using db.
+
+victorC -- 2024-12-13 10:58
+* Init basicStockInfo table
