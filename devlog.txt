@@ -79,3 +79,7 @@ victorC -- 2024-12-12 18:15
 
 victorC -- 2024-12-12 18:40
 * Made GET methods for DB
+
+brianL -- 2024-12-09 10:44
+* Fixed issues involving the display of error messages for Calendarific
+* Updated __init__.py to implement login and signup functionality using db.
