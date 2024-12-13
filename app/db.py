@@ -5,7 +5,9 @@ def getNewsSections():
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
     "us", "world"] #to minimize api calls
 def getStockList():
-    return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'ORLY', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
+    return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
+def getStockNameList():
+    return
 def createTables():
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -41,6 +43,12 @@ def createTables():
 
     #Stock Preferences Info
     stocks = getStockList()
+
+    for i in stocks:
+        name = APIModule.FMP.getName(i)
+        executable = f"INSERT INTO basicStockInfo VALUES ('{name[0]}', '{i}')"
+        #print(executable)
+        c.execute(executable)
 
     executable = "CREATE TABLE IF NOT EXISTS stockPreferences (userID INTEGER, "
     for i in stocks:
@@ -130,7 +138,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
 
     c.execute(f"DELETE FROM newsContentPreferences WHERE userID = {userID}")
 
-    executable = f"INSERT INTO newsContentPreferences VALUES ({userID}, "
+    executable = f"INSERT INTO neORLYwsContentPreferences VALUES ({userID}, "
     for i in range(newsPref_column_count - 1):
         executable = executable + "0, " #row of all zeros to reset prefs
     executable = executable[:-2] + ")"
