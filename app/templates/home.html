@@ -8,35 +8,41 @@
 </head>
   <body>
     <h1>Welcome to the Homepage!</h1>
-
-        <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
-        {% if loggedin %}
-        <form method="POST">
-            <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
-        </form>
-        <form method="POST">
-            <button type="submit" name="type" value="logoutbutton">Logout</button>
-        </form>
-        <p>Holidays in {{list[1]}}</p>
+  
+    <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
+    {% if loggedin %}
+    <form method="POST">
+      <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
+    </form>
+    <form method="POST">
+      <button type="submit" name="type" value="logoutbutton">Logout</button>
+    
+    </form>
+      {% if holidays is not string %}
+        <p>Holidays in {{holidays[1]}}</p>
         <table>
-        {% for holiday in list[2: ] %}
-          <tr>
+        {% for holiday in holidays[2: ] %}
+          <tr>  
             <td>{{ holiday }}</td>
           </tr>
         {% endfor %}
         </table>
+      {% else %}
+        <p>{{holidays}}</p>
+      {% endif %}
+    
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
-        {% else %}
-            <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
-            <form method="POST">
-                <button type="submit" name="type" value="loginbutton">Login</button>
-            </form>
-            <br>
-            <!--BUTTON TO REDIRECT TO SIGNUP PAGE-->
-            <form method="POST">
-                <button type="submit" name="type" value="signupbutton">Sign Up</button>
-            </form>
-        {% endif %}
-        <br><br><br>
+    {% else %}
+    <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
+    <form method="POST">
+      <button type="submit" name="type" value="loginbutton">Login</button>
+    </form>
+    <br>
+    <!--BUTTON TO REDIRECT TO SIGNUP PAGE-->
+    <form method="POST">
+      <button type="submit" name="type" value="signupbutton">Sign Up</button>
+    </form>
+    {% endif %}
+    <br><br><br>
   </body>
 </html>

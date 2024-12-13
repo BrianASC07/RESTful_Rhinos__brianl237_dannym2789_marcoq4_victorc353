@@ -199,6 +199,8 @@ def getUserID(username):
     c.execute(f"SELECT userID FROM userData WHERE username = '{username}'")
     row = c.fetchone()
     db.close()
+    if row == None:
+        return None
     return row[0]
 
 '''

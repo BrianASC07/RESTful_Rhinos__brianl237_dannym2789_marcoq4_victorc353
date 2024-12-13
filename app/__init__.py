@@ -4,6 +4,8 @@ import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
 
 from APIModule import OWM, Calendarific, FMP
+import db
+
 #KEY TESTING
 keys_missing = False
 
@@ -21,7 +23,7 @@ try:
     print("NYT KEY LOADED")
 
     Calendar = open("../keys/key_Calendarific.txt", "r")
-    Calendarific_key = Calendarifickey.read()
+    Calendarific_key = Calendar.read()
     print("CALENDARIFIC KEY LOADED")
 
     Open_Weather_Map = open("../keys/key_Open_Weather_Map.txt", "r")
@@ -42,11 +44,13 @@ if(FMP_key == "" or Open_Weather_Map_key == "" or NYT_key == "" or Calendarific_
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
+
+db.createTables()
 ##########################################
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if(keys_missing): #do sm #update later for all the other APIs
-        return render_template("wrong.html")
+    #if(keys_missing): #do sm #update later for all the other APIs
+    #    return render_template("wrong.html")
     if request.method == 'POST':
         type = request.form.get("type")
         if (type == "loginbutton"):
@@ -60,9 +64,11 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
-    holidaylist = Calendarific.getInfo('us','ny')
+
     if 'username' in session:
-        return render_template('home.html', loggedin=True, list=holidaylist)
+        holidaylist = Calendarific.getInfo('us','ny')
+        print(holidaylist)
+        return render_template('home.html', loggedin=True, holidays=holidaylist)
     return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
@@ -71,10 +77,13 @@ def login():
         type = request.form.get("type")
         #LOGIN BUTTON
         if (type == "loginenter"):
-            #DB STUFF HERE
-            if (True):
-                session['username'] = ""
+            username = request.form.get("user")
+            password = request.form.get("password")
+            if ((db.getUserID(username) is not None) and (db.isPasswordCorrect(username, password))):
+                session['username'] = username
                 return redirect(url_for('home'))
+            else:
+                return render_template('login.html', error = "Username or password is not correct")
         #RETURN BACK HOME BUTTON
         if (type == "returnhome"):
             return redirect(url_for('home'))
@@ -93,10 +102,11 @@ def signup():
         type = request.form.get("type")
         #SIGN UP BUTTON
         if (type == "signupenter"):
-            #DB STUFF HERE
-            if (True):
-                session['username'] = ""
-                return redirect(url_for('home'))
+            username = request.form.get("user")
+            password = request.form.get("password")
+            session['username'] = username
+            db.createUser(username, password)
+            return redirect(url_for('home'))
         #RETURN BACK HOME BUTTON
         if (type == "returnhome"):
             return redirect(url_for('home'))

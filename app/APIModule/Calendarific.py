@@ -1,6 +1,5 @@
 import urllib.request
 import json
-import os
 import datetime
 
 def getInfo(country, state):
@@ -25,8 +24,9 @@ def getInfo(country, state):
 
                 for holiday in data.get("response").get("holidays"):
                     list.append(holiday.get("name"))
+                print(list)
                 return list
             else: #fallback for if the response code isn't 200
-                return "Sorry, the API is currently unavailable"
+                return "Sorry, the Calendarific API is currently unavailable"
     except: # catches all other errors
-        return "Sorry, an error occured"
+        return "Sorry, an error occured with the Calendarific API"
