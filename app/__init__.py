@@ -59,8 +59,8 @@ def home():
 
     #IF LOGGED IN
     #the three variables below are just for testing purposes only. More info should be added.
-    holidaylist = Calendarific.getInfo(2024,12,'us','ny')
-    nasdaq = FMP.getNasdaqList()
+    holiday_today = "Friday the 13th. OOOOOOOH SPOOOOOKY"
+     = 
     temp = OWM.getInfo("New_York")
     if 'username' in session:
         return render_template('home.html', loggedin=True, Calendarific_Info=holidaylist[0], FMP_Info=list(nasdaq)[0], OWM_Info=temp)

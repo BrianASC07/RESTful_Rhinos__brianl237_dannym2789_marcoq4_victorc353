@@ -33,11 +33,11 @@
         <br>
         <br>
         <br>
-        <div class="grid grid-cols-4 gap-auto">
-          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{Calendarific_Info}}</p>
-          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{FMP_Info}}</p>
-          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{OWM_Info}}</p>
-          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline'>{{NYT_Info}}</p>
+        <div class="grid grid-cols-4 gap-4">
+          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is {{holiday_today}}</p>
+          <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's Stock Updates</p>
+          <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}</p>
+          <p class='block mt-1 mr-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's News</p>
         </div>
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
         {% else %}
