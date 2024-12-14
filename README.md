@@ -3,7 +3,7 @@
 # Roster:
 **Brian Liu**: Project Manager, Backend + Flask, Implement Calendarific API
 
-**Victor Casado**: Backend + Databases, Implement Financial Modeling Prep API
+**Victor Casado**: Backend + Databases + Flask, Implement Financial Modeling Prep API
 
 **Danny Mok**: Database Engineer, Implement NYT API
 
