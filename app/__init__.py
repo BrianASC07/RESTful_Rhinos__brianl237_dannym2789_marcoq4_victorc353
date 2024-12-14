@@ -58,22 +58,6 @@ def home():
     if(keys_missing):
         print("SOMETHING IS WRONG WITH KEYS!!!\n")
         return render_template("wrong.html")
-
-    if request.method == 'POST':
-        type = request.form.get("type")
-        if (type == "loginbutton"):
-            print("REDIRECTING TO LOGIN")
-            return redirect(url_for('login'))
-        elif (type == "signupbutton"):
-            print("REDIRECTING TO SIGNUP")
-            return redirect(url_for('signup'))
-        elif (type == "logoutbutton"):
-            print("LOGGING OUT... REDIRECTING TO HOME")
-            session.pop('userID')
-            return redirect(url_for('home'))
-        elif (type == "profilebutton"):
-            print("REDIRECTING TO PROFILE PAGE")
-            return redirect(url_for('profile'))
     #IF LOGGED IN
     if 'userID' in session:
         #These are templates of what we info needs to be displayed on the home page.
@@ -98,22 +82,16 @@ def home():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        type = request.form.get("type")
-        #LOGIN BUTTON
-        if (type == "loginenter"):
-            username = request.form.get("user")
-            password = request.form.get("password")
-            if ((db.getUserID(username) is not None) and (db.isPasswordCorrect(username, password))):
-                session['userID'] = db.getUserID(username)
-                print("LOGIN CORRECT... REDIRECTING TO HOME")
-                return redirect(url_for('home'))
-            else:
-                print("LOGIN INCORRECT... REDIRECTING BACK TO LOGIN")
-                return render_template('login.html', error = "Username or password is not correct")
-        #RETURN BACK HOME BUTTON
-        if (type == "returnhome"):
-            print("BACK TO HOME")
+        username = request.form.get("user")
+        password = request.form.get("password")
+        if ((db.getUserID(username) is not None) and (db.isPasswordCorrect(username, password))):
+            session['userID'] = db.getUserID(username)
+            print("LOGIN CORRECT... REDIRECTING TO HOME")
             return redirect(url_for('home'))
+        else:
+            print("LOGIN INCORRECT... REDIRECTING BACK TO LOGIN")
+            return render_template('login.html', error = "Username or password is not correct")
+
 
     #IF LOGGED IN
     if 'userID' in session:
@@ -128,19 +106,13 @@ def signup():
     if 'username' in session:
         redirect(url_for('home'))
     if request.method == 'POST':
-        type = request.form.get("type")
-        #SIGN UP BUTTON
-        if (type == "signupenter"):
-            username = request.form.get("user")
-            password = request.form.get("password")
-            db.createUser(username, password)
-            session['userID'] = db.getUserID(username)
-            print("SIGNED UP SUCCESSFULLY... GOING HOME")
-            return redirect(url_for('home'))
-        #RETURN BACK HOME BUTTON
-        if (type == "returnhome"):
-            print("BACK TO HOME")
-            return redirect(url_for('home'))
+        username = request.form.get("user")
+        password = request.form.get("password")
+        db.createUser(username, password)
+        session['userID'] = db.getUserID(username)
+        print("SIGNED UP SUCCESSFULLY... GOING HOME")
+        return redirect(url_for('home'))
+
 
     print("ARRIVED AT SIGNUP PAGE")
     return render_template('signup.html')
@@ -148,38 +120,37 @@ def signup():
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
     if request.method == 'POST':
-        type = request.form.get("type")
-        if (type == "prefsbutton"):
-            print("GOING TO CHANGE PREFS")
-            return redirect(url_for('prefs'))
-        #RETURN BACK HOME BUTTON
-        if (type == "returnhome"):
-            print("GOING BACK HOME")
-            return redirect(url_for('home'))
+        id = session.get('userID')
+        city = request.form.get('city_name')
+        stockNames = request.form.getlist('stock_names')
+        news = request.form.getlist('section_names')
+        stockDict = db.getStockDict()
+        stocks = []
+        for i in stockNames:
+            stocks.append(stockDict[f"{i}"])
+        print("ID: " + str(id))
+        print("CITY: " + city)
+        print("STOCKS: " + str(stocks))
+        print("NEWS SECTIONS: " + str(news))
+        db.addPrefs(id, city, stocks, news)
     print("ARRIVED AT PROFILE PAGE")
     return render_template('profile.html')
 ##########################################
 @app.route("/preferences", methods=['GET', 'POST'])
 def prefs():
     if request.method == 'POST':
-        name = request.form.get("name")
-        #RETURN BACK HOME BUTTON
-        print("RECEIVING DATA\nNAME: " + str(name))
-        if (name == "goHome"):
-            print("GOING BACK HOME")
-            return redirect(url_for('home'))
-        if (name == "stock_names"):
-            print("STOCKS: " + request.form.get("stock_names"))
-        if (name == "section_names"):
-            print("NEWS TYPES: " + request.form.get("section_names"))
-        if (name == "city_name"):
-            print("CITY: " + request.form.get("city_name"))
+        print("RECEIVING DATA")
 
     print("ARRIVED AT PREFERENCE CHANGE PAGE")
     stockList = list(db.getStockDict().keys())
     newsSectionList = db.getNewsSections()
     cityList = list(db.getCityDict().keys())
     return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList)
+##########################################
+@app.route("/logout")
+def logout():
+    session.pop("userID")
+    return redirect(url_for('home'))
 ##########################################
 if __name__ == "__main__":
     app.debug = True
