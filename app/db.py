@@ -217,7 +217,15 @@ def getUserID(username):
     if row == None:
         return None
     return row[0]
-
+def getUsername(userID):
+    db = sqlite3.connect("RESTables.db")
+    c = db.cursor()
+    c.execute(f"SELECT username FROM userData WHERE userID = '{userID}'")
+    row = c.fetchone()
+    db.close()
+    if row == None:
+        return None
+    return row[0]
 '''
 createTables()
 createUser("victor", "casado")
