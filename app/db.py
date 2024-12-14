@@ -169,7 +169,7 @@ def createTables():
     c.execute(executable)
 
     #Stock Preferences Info
-    stocks = getStockDist()
+    stocks = getStockDict()
 
     for i in list(stocks.keys()):
         name = i
