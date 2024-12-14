@@ -4,7 +4,7 @@ def getNewsSections():
     return ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion",
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
     "us", "world"] #to minimize api calls
-def getStockList():
+def getStockDict(): #dict, key is comapny name, answer is symbol
     return {
 "American Electric Power Company, Inc.": "AEP",
 "Coca-Cola Europacific Partners PLC": "CCEP",
@@ -169,7 +169,7 @@ def createTables():
     c.execute(executable)
 
     #Stock Preferences Info
-    stocks = getStockList()
+    stocks = getStockDist()
 
     for i in list(stocks.keys()):
         name = i
@@ -304,7 +304,7 @@ def getUserStocks(userID):
     c = db.cursor()
     c.execute(f"SELECT * FROM stockPreferences WHERE userID = {userID}")
     row = c.fetchone() #1st element is uid
-    stocks = getStockList()
+    stocks = getStockDict()
     returner = []
     for i in range(len(stocks)):
         if(row[i+1] == 1):
