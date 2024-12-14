@@ -74,28 +74,24 @@ def home():
         elif (type == "profilebutton"):
             print("REDIRECTING TO PROFILE PAGE")
             return redirect(url_for('profile'))
-
     #IF LOGGED IN
-    if 'username' in session:
+    if 'userID' in session:
         #These are templates of what we info needs to be displayed on the home page.
-        today_holiday = f"Friday the 13th. OOOOOOOH SPOOOOOKY"
+        today_holiday = "Friday the 13th. OOOOOOOH SPOOOOOKY"
         holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
         today_weather = "Cloudy"
         temp = "15"
-        stock_name = "Doge Coin"
-        stock_change = "+10000000%"
-        news_title = "Breaking news # 1"
-        news_description = "This is breaking news. The first."
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, stock = stock_name, inc_dec = stock_change, title = news_title, description = news_description)
-
-    if 'userID' in session:
+        stock_list = ['Amazon', 'Buzzfeed', 'Crackle']
+        inc_dec = ['+5.5%', '-150.0%', '-1000.0']
+        news_today = ['From the screen', 'To the ring', 'To the pen', 'To the king']
+        news_description = ["Where's my crown that's my bling", 'Always drama when I ring', 'See I believe that if I see it in my heart', "Smash through the ceiling 'cus I'm reaching for the stars"]
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         if(db.getUserCity(session.get('userID')) == ''):
             holidaylist = Calendarific.getInfo('us','ny') #REPLACE 'ny' with a fn that gets all us holidays
         else:
             holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity(session.get('userID'))])
         print("LOADED HOLIDAYS")
-        return render_template('home.html', loggedin=True, holidays=holidaylist)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp)
 
     print("NOT LOGGED IN\n")
 
