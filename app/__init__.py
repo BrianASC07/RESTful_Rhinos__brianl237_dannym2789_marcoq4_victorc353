@@ -2,13 +2,11 @@ import os
 import json
 import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
-
 from APIModule import OWM, Calendarific, FMP
 import db
 
 #KEY TESTING
 keys_missing = False
-
 FMP_key = ""
 Open_Weather_Map_key = ""
 NYT_key = ""
@@ -18,8 +16,8 @@ try:
     FMP_key = FMP.read()
     print("\nFMP KEY LOADED")
 
-    NYT = open("../keys/key_NYT.txt", "r")
-    NYT_key = NYT.read()
+    New_York_Times = open("../keys/key_NYT.txt", "r")
+    NYT_key = New_York_Times.read()
     print("NYT KEY LOADED")
 
     Calendar = open("../keys/key_Calendarific.txt", "r")
@@ -78,6 +76,17 @@ def home():
             return redirect(url_for('profile'))
 
     #IF LOGGED IN
+    if 'username' in session:
+        #These are templates of what we info needs to be displayed on the home page.
+        today_holiday = f"Friday the 13th. OOOOOOOH SPOOOOOKY"
+        holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
+        today_weather = "Cloudy"
+        temp = "15"
+        stock_name = "Doge Coin"
+        stock_change = "+10000000%"
+        news_title = "Breaking news # 1"
+        news_description = "This is breaking news. The first."
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, stock = stock_name, inc_dec = stock_change, title = news_title, description = news_description)
 
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
@@ -89,6 +98,7 @@ def home():
         return render_template('home.html', loggedin=True, holidays=holidaylist)
 
     print("NOT LOGGED IN\n")
+
     return render_template('home.html', loggedin=False)
 ##########################################
 @app.route("/login", methods=['GET', 'POST'])
