@@ -5,7 +5,130 @@ def getNewsSections():
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
     "us", "world"] #to minimize api calls
 def getStockList():
-    return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
+    return {
+"American Electric Power Company, Inc.": "AEP",
+"Coca-Cola Europacific Partners PLC": "CCEP",
+"Comcast Corporation": "CMCSA",
+"The Sherwin-Williams Company": "SHW",
+"CDW Corporation": "CDW",
+"Intuit Inc.": "INTU",
+"Intuitive Surgical, Inc.": "ISRG",
+"Copart, Inc.": "CPRT",
+"AstraZeneca PLC": "AZN",
+"Illumina, Inc.": "ILMN",
+"The Trade Desk, Inc.": "TTD",
+"Texas Instruments Incorporated": "TXN",
+"Roper Technologies, Inc.": "ROP",
+"Microsoft Corporation": "MSFT",
+"Marvell Technology, Inc.": "MRVL",
+"Meta Platforms, Inc.": "META",
+"Palo Alto Networks, Inc.": "PANW",
+"PACCAR Inc": "PCAR",
+"Alphabet Inc.": "GOOG",
+"Lululemon Athletica Inc.": "LULU",
+"Booking Holdings Inc.": "BKNG",
+"Cisco Systems, Inc.": "CSCO",
+"ASML Holding N.V.": "ASML",
+"Alphabet Inc.": "GOOGL",
+"KLA Corporation": "KLAC",
+"Atlassian Corporation": "TEAM",
+"Costco Wholesale Corporation": "COST",
+"Cadence Design Systems, Inc.": "CDNS",
+"Warner Bros. Discovery, Inc.": "WBD",
+"PepsiCo, Inc.": "PEP",
+"Automatic Data Processing, Inc.": "ADP",
+"Electronic Arts Inc.": "EA",
+"DexCom, Inc.": "DXCM",
+"Linde plc": "LIN",
+"Exelon Corporation": "EXC",
+"Zscaler, Inc.": "ZS",
+"Johnson & Johnson": "JNJ",
+"Tesla, Inc.": "TSLA",
+"Charter Communications, Inc.": "CHTR",
+"The Home Depot, Inc.": "HD",
+"Mondelez International, Inc.": "MDLZ",
+"DoorDash, Inc.": "DASH",
+"Old Dominion Freight Line, Inc.": "ODFL",
+"Regeneron Pharmaceuticals, Inc.": "REGN",
+"Amgen Inc.": "AMGN",
+"ANSYS, Inc.": "ANSS",
+"Amazon.com, Inc.": "AMZN",
+"Cognizant Technology Solutions Corporation": "CTSH",
+"MercadoLibre, Inc.": "MELI",
+"NXP Semiconductors N.V.": "NXPI",
+"Fastenal Company": "FAST",
+"The Procter & Gamble Company": "PG",
+"Constellation Energy Corporation": "CEG",
+"Chevron Corporation": "CVX",
+"NVIDIA Corporation": "NVDA",
+"PDD Holdings Inc.": "PDD",
+"NIKE, Inc.": "NKE",
+"Synopsys, Inc.": "SNPS",
+"Salesforce, Inc.": "CRM",
+"American Express Company": "AXP",
+"The Travelers Companies, Inc.": "TRV",
+"3M Company": "MMM",
+"Netflix, Inc.": "NFLX",
+"PayPal Holdings, Inc.": "PYPL",
+"Vertex Pharmaceuticals Incorporated": "VRTX",
+"Xcel Energy Inc.": "XEL",
+"Merck & Co., Inc.": "MRK",
+"Keurig Dr Pepper Inc.": "KDP",
+"Take-Two Interactive Software, Inc.": "TTWO",
+"Dollar Tree, Inc.": "DLTR",
+"Airbnb, Inc.": "ABNB",
+"Datadog, Inc.": "DDOG",
+"Baker Hughes Company": "BKR",
+"Analog Devices, Inc.": "ADI",
+"Fortinet, Inc.": "FTNT",
+"Workday, Inc.": "WDAY",
+"Caterpillar Inc.": "CAT",
+"The Kraft Heinz Company": "KHC",
+"QUALCOMM Incorporated": "QCOM",
+"Starbucks Corporation": "SBUX",
+"Biogen Inc.": "BIIB",
+"Paychex, Inc.": "PAYX",
+"T-Mobile US, Inc.": "TMUS",
+"Honeywell International Inc.": "HON",
+"Visa Inc.": "V",
+"The Goldman Sachs Group, Inc.": "GS",
+"International Business Machines Corporation": "IBM",
+"Walgreens Boots Alliance, Inc.": "WBA",
+"UnitedHealth Group Incorporated": "UNH",
+"CoStar Group, Inc.": "CSGP",
+"Marriott International, Inc.": "MAR",
+"Gilead Sciences, Inc.": "GILD",
+"Ross Stores, Inc.": "ROST",
+"McDonald's Corporation": "MCD",
+"Microchip Technology Incorporated": "MCHP",
+"GE HealthCare Technologies Inc.": "GEHC",
+"The Coca-Cola Company": "KO",
+"Adobe Inc.": "ADBE",
+"Broadcom Inc.": "AVGO",
+"The Boeing Company": "BA",
+"Diamondback Energy, Inc.": "FANG",
+"The Walt Disney Company": "DIS",
+"Cintas Corporation": "CTAS",
+"Applied Materials, Inc.": "AMAT",
+"Apple Inc.": "AAPL",
+"MongoDB, Inc.": "MDB",
+"Micron Technology, Inc.": "MU",
+"Arm Holdings plc American Depositary Shares": "ARM",
+"CrowdStrike Holdings, Inc.": "CRWD",
+"Monster Beverage Corporation": "MNST",
+"Verizon Communications Inc.": "VZ",
+"Autodesk, Inc.": "ADSK",
+"Walmart Inc.": "WMT",
+"CSX Corporation": "CSX",
+"Verisk Analytics, Inc.": "VRSK",
+"Advanced Micro Devices, Inc.": "AMD",
+"Intel Corporation": "INTC",
+"Moderna, Inc.": "MRNA",
+"IDEXX Laboratories, Inc.": "IDXX",
+"JPMorgan Chase & Co.": "JPM",
+"GLOBALFOUNDRIES Inc.": "GFS",
+"Lam Research Corporation": "LRCX",
+}
 def getCityDict(): #dict, key is city name, answer is state
     with open("APIModule/Cities.csv", "r") as citiesCSV:
         csvreader = csv.reader(citiesCSV)
@@ -48,17 +171,16 @@ def createTables():
     #Stock Preferences Info
     stocks = getStockList()
 
-    for i in stocks:
-        name = APIModule.FMP.getName(i)
-        #print(str(name[0]) + ": " + str(i))
-        c.execute(f"INSERT INTO basicStockInfo VALUES (?, ?)", (str(name[0]), str(i)))
-
+    for i in list(stocks.keys()):
+        name = i
+        symbol = stocks[f"{name}"]
+        #print(str("\"" + name) + "\": \"" + symbol + "\",")
+        c.execute(f"INSERT INTO basicStockInfo VALUES (?, ?)", (name, symbol))
     print("STOCKS POPULATED ")
 
     executable = "CREATE TABLE IF NOT EXISTS stockPreferences (userID INTEGER, "
     for i in stocks:
-        executable = executable + str(i) + " INTEGER, " #0 if user doesnt care, 1 if user does (each user is a row)
-
+        executable = executable + stocks[f"{i}"] + " INTEGER, " #0 if user doesnt care, 1 if user does (each user is a row)
     executable = executable[:-2] + ")"
 
     c.execute(executable)
@@ -226,6 +348,8 @@ def getUsername(userID):
     if row == None:
         return None
     return row[0]
+
+createTables()
 '''
 createTables()
 createUser("victor", "casado")
