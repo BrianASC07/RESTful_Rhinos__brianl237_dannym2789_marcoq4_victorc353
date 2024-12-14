@@ -81,17 +81,15 @@ def home():
         holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
         today_weather = "Cloudy"
         temp = "15"
-        stock_list = ['Amazon', 'Buzzfeed', 'Crackle']
-        inc_dec = ['+5.5%', '-150.0%', '-1000.0']
-        news_today = ['From the screen', 'To the ring', 'To the pen', 'To the king']
-        news_description = ["Where's my crown that's my bling", 'Always drama when I ring', 'See I believe that if I see it in my heart', "Smash through the ceiling 'cus I'm reaching for the stars"]
+        stock_list = {'Amazon': '+5.5%', 'Buzzfeed': '-150.0%', 'Crackle': '-1000.0%'}
+        news_list = {'From the screen': "Where's my crown that's my bling", 'To the ring': 'Always drama when I ring', 'To the pen': 'See I believe that if I see it in my heart', 'To the king': "Smash through the ceiling 'cus I'm reaching for the stars"}
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         if(db.getUserCity(session.get('userID')) == ''):
             holidaylist = Calendarific.getInfo('us','ny') #REPLACE 'ny' with a fn that gets all us holidays
         else:
             holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity(session.get('userID'))])
         print("LOADED HOLIDAYS")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_list, all_news = news_list)
 
     print("NOT LOGGED IN\n")
 

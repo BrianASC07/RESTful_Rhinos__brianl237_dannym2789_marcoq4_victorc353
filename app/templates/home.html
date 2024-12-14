@@ -34,10 +34,26 @@
           <br>
           <div class="flex flex-row justify-center items-center space-x-20">
             <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is {{holiday_today}}<br class="hidden sm:inline" /><sub>{{holiday_stuff}}</sub></p>
-            <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's Stock Updates</p>
-            <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}<br class="hidden sm:inline" /><sub>{{temp_info}}</sub></p>
-            <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's News</p>
+            <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
+              <p>Today's stock updates:</p>
+              <br class="hidden sm:inline" />
+              {% for stocks, change in all_stocks.items() %}
+              <ul>
+                <li> {{stocks}} <br class="hidden sm:inline" /><sub>{{change}}</li>
+              </ul>
+              {% endfor %}
+            </div><p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}<br class="hidden sm:inline" /><sub>{{temp_info}}</sub></p>
+            <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
+              <p>Today's News</p>
+              <br class="hidden sm:inline" />
+              {% for headline, descriptions in all_news.items() %}
+              <ul>
+                <li> {{headline}} <br class="hidden sm:inline" /><sub>{{descriptions}}</li>
+              </ul>
+              {% endfor %}
+            </div>
           </div>
+
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
         {% else %}
             <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
