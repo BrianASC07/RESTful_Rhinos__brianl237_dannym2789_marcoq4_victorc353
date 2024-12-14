@@ -6,14 +6,15 @@ def getNewsSections():
     "us", "world"] #to minimize api calls
 def getStockList():
     return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
-def getCityList(): #2d list, 1st entry is city name, second is state
+def getCityDict(): #dict, key is city name, answer is state
     with open("APIModule/Cities.csv", "r") as citiesCSV:
         csvreader = csv.reader(citiesCSV)
-        cities = []
+        cities = {}
         for row in csvreader:
-            cities.append(row)
+            cities[row[0]] = row[1]
         return cities
 def createTables():
+    print("CREATING TABLES... THIS TAKES A SECOND")
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
 
@@ -49,9 +50,10 @@ def createTables():
 
     for i in stocks:
         name = APIModule.FMP.getName(i)
-        executable = f"INSERT INTO basicStockInfo VALUES ('{name[0]}', '{i}')"
-        #print(executable)
-        c.execute(executable)
+        #print(str(name[0]) + ": " + str(i))
+        c.execute(f"INSERT INTO basicStockInfo VALUES (?, ?)", (str(name[0]), str(i)))
+
+    print("STOCKS POPULATED ")
 
     executable = "CREATE TABLE IF NOT EXISTS stockPreferences (userID INTEGER, "
     for i in stocks:
@@ -63,6 +65,8 @@ def createTables():
 
     db.commit()
     db.close()
+
+    print("TABLES SUCCESSFULLY CREATED \n")
 def createUser(username, password):
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
