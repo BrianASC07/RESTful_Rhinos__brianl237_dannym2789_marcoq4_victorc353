@@ -64,3 +64,33 @@ brianL -- 2024-12-09 10:44
 victorC -- 2024-12-11 10:28
 * Removed reason website crashed
 * Made website redirect when API keys load improperly
+
+victorC -- 2024-12-12 11:00
+* Revised db structure
+* Made function to add user to db
+* Made function to print db table to assist in debugging
+
+victorC -- 2024-12-12 17:14
+* Revised db structure a tiny bit more
+* Made adding a user add rows to userData, stockprefs, and newsprefs
+
+victorC -- 2024-12-12 18:15
+* Made adding prefs function
+
+victorC -- 2024-12-12 18:40
+* Made GET methods for DB
+
+brianL -- 2024-12-09 20:57
+* Fixed issues involving the display of error messages for Calendarific
+* Updated __init__.py to implement login and signup functionality using db.
+
+victorC -- 2024-12-13 10:58
+* Init basicStockInfo table
+
+victorC -- 2024-12-13 21:53
+* Get city info
+
+victorC -- 2024-12-13 22:32
+* Diagnostic print statements in __init__.py
+* Removed app crash
+* session now is based on userID not username
