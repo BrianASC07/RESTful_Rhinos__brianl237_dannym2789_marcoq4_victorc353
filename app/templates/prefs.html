@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Amazon<!DOCTYPE html>
 
 <html>
   <head>
@@ -31,20 +31,53 @@
       <button type="submit" name="type" value="returnhome">Return to Homepage</button>
     </form>
     <form method="POST">
-      <select name="test[]" size="4" multiple>
-      <option>123</option>
-      <option>456</option>
-      <option>789</option>
-      <option>123</option>
-      <option>456</option>
-      <option>789</option>
-      <option>123</option>
-      <option>456</option>
-      <option>789</option>
-      <option>123</option>
-      <option>456</option>
-      <option>789</option>
+      <!--I decided to cut these down to just the first 20 cities on the list for OWM API testing purposes!-->
+      <label for="city_names">Choose the city you live in:</label>
+      <select name="city_names" id = "city_names">
+        <option value="New York">New York</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <option value="Houston">Houston</option>
+        <option value="Philadelphia">Philadelphia</option>
+        <option value="Phoenix">Phoenix</option>
+        <option value="San Antonio">San Antonio</option>
+        <option value="San Diego">San Diego</option>
+        <option value="Dallas">Dallas</option>
+        <option value="San Jose">San Jose</option>
+        <option value="Indianapolis">Indianapolis</option>
+        <option value="Jacksonville">Jacksonville</option>
+        <option value="San Francisco">San Francisco</option>
+        <option value="Austin">Austin</option>
+        <option value="Columbus">Columbus</option>
+        <option value="Fort Worth">Fort Worth</option>
+        <option value="Charlotte">Charlotte</option>
+        <option value="Detroit">Detroit</option>
+        <option value="El Paso">El Paso</option>
+        <option value="Memphis">Memphis</option>
       </select>
+      <br class="hidden sm:inline" />
+      <br class="hidden sm:inline" />
+      <input type="submit" name="sub1">
+    </form>
+    <form method="POST">
+      <!--These are just placeholders for stocks. A function that returns all of the names of what stocks we are using would be nice!-->
+      <details>
+      <summary>Choose the company stocks you want to follow</summary>
+        <fieldset>
+          <ul>
+            <li>
+              <label for="Amazon">Amazon<input type="checkbox" id="Amazon" name="Amazon" value="Amazon"></label>
+            </li>
+            <li>
+              <label for="Buzzfeed">Buzzfeed<input type="checkbox" id="Buzzfeed" name="Buzzfeed" value="Buzzfeed"></label>
+            </li>
+            <li>
+              <label for="Crackle">Crackle<input type="checkbox" id="Crackle" name="Crackle" value="Crackle"></label>
+            </li>
+          </ul>
+        </fieldset>
+      <br class="hidden sm:inline" />
+      <br class="hidden sm:inline" />
       <input type="submit" name="sub1">
     </form>
   </body>
