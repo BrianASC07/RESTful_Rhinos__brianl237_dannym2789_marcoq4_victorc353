@@ -174,4 +174,4 @@ def prefs():
 ##########################################
 if __name__ == "__main__":
     app.debug = True
-    app.run(use_reloader=False)
+    app.run(use_reloader=False, debug=False)
