@@ -97,3 +97,7 @@ victorC -- 2024-12-13 22:32
 
 victorC -- 2024-12-13 22:46
 * Removed several app crashing bugs I created 10 mins ago
+
+marcoQ -- 2024-12-14 4:04
+* Added basic HTML templates that take in flask variables
+* Started with Tailwind CSS implementation
