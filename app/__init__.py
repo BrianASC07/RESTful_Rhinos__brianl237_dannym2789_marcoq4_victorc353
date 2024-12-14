@@ -80,8 +80,11 @@ def home():
     #IF LOGGED IN
 
     if 'userID' in session:
-        print("ALREADY LOGGED IN... USERID: " + session.get('userID'))
-        holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity()])
+        print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
+        if(db.getUserCity(session.get('userID')) == ''):
+            holidaylist = Calendarific.getInfo('us','ny') #REPLACE 'ny' with a fn that gets all us holidays
+        else:
+            holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity(session.get('userID'))])
         print("LOADED HOLIDAYS")
         return render_template('home.html', loggedin=True, holidays=holidaylist)
 
@@ -126,8 +129,8 @@ def signup():
         if (type == "signupenter"):
             username = request.form.get("user")
             password = request.form.get("password")
-            session['userID'] = db.getUserID(username)
             db.createUser(username, password)
+            session['userID'] = db.getUserID(username)
             print("SIGNED UP SUCCESSFULLY... GOING HOME")
             return redirect(url_for('home'))
         #RETURN BACK HOME BUTTON
