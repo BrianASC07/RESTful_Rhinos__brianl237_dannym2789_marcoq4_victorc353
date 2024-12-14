@@ -162,13 +162,24 @@ def profile():
 @app.route("/preferences", methods=['GET', 'POST'])
 def prefs():
     if request.method == 'POST':
-        type = request.form.get("type")
+        name = request.form.get("name")
         #RETURN BACK HOME BUTTON
-        if (type == "returnhome"):
+        print("RECEIVING DATA\nNAME: " + str(name))
+        if (name == "goHome"):
             print("GOING BACK HOME")
             return redirect(url_for('home'))
-    "ARRIVED AT PREFERENCE CHANGE PAGE"
-    return render_template('prefs.html')
+        if (name == "stock_names"):
+            print("STOCKS: " + request.form.get("stock_names"))
+        if (name == "section_names"):
+            print("NEWS TYPES: " + request.form.get("section_names"))
+        if (name == "city_name"):
+            print("CITY: " + request.form.get("city_name"))
+
+    print("ARRIVED AT PREFERENCE CHANGE PAGE")
+    stockList = list(db.getStockDict().keys())
+    newsSectionList = db.getNewsSections()
+    cityList = list(db.getCityDict().keys())
+    return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList)
 ##########################################
 if __name__ == "__main__":
     app.debug = True

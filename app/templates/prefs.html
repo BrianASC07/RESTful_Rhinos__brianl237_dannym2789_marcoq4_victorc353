@@ -23,82 +23,52 @@
 
   <body>
     <h1>Change Your User Preferences</h1>
-    <br>
+    <br><p>You have to choose each type individually <br> Hold Left Control to select multiple</p>
     <br>
 
     <!--BUTTON TO REDIRECT TO THE HOMEPAGE (WITHOUT LOGGING IN)-->
     <form method="POST">
-      <button type="submit" name="type" value="returnhome">Return to Homepage</button>
+      <button type="submit" name="goHome" value="returnhome">Return to Homepage</button>
     </form>
+
     <form method="POST">
-      <!--I decided to cut these down to just the first 20 cities on the list for OWM API testing purposes!-->
-      <label for="city_names">Choose the city you live in:</label>
-      <select name="city_names" id = "city_names">
-        <option value="New York">New York</option>
-        <option value="Los Angeles">Los Angeles</option>
-        <option value="Chicago">Chicago</option>
-        <option value="Houston">Houston</option>
-        <option value="Philadelphia">Philadelphia</option>
-        <option value="Phoenix">Phoenix</option>
-        <option value="San Antonio">San Antonio</option>
-        <option value="San Diego">San Diego</option>
-        <option value="Dallas">Dallas</option>
-        <option value="San Jose">San Jose</option>
-        <option value="Indianapolis">Indianapolis</option>
-        <option value="Jacksonville">Jacksonville</option>
-        <option value="San Francisco">San Francisco</option>
-        <option value="Austin">Austin</option>
-        <option value="Columbus">Columbus</option>
-        <option value="Fort Worth">Fort Worth</option>
-        <option value="Charlotte">Charlotte</option>
-        <option value="Detroit">Detroit</option>
-        <option value="El Paso">El Paso</option>
-        <option value="Memphis">Memphis</option>
+      <label for="city_name">Choose the city you live in:</label>
+      <select name="city_name" id = "city_name">
+        {% for city in cities %}
+        <option value={{city}} name="city_name">{{city}}</option>
+        {% endfor %}
       </select>
       <br class="hidden sm:inline" />
       <br class="hidden sm:inline" />
       <input type="submit" name="sub1">
     </form>
+
+
     <form method="POST">
-      <!--These are just placeholders for stocks. A function that returns all of the names of what stocks we are using would be nice!-->
-      <summary>Choose the company stocks you want to follow</summary>
-        <fieldset>
-          <ul>
-            <li>
-              <label for="Amazon">Amazon<input type="checkbox" id="Amazon" name="Amazon" value="Amazon"></label>
-            </li>
-            <li>
-              <label for="Buzzfeed">Buzzfeed<input type="checkbox" id="Buzzfeed" name="Buzzfeed" value="Buzzfeed"></label>
-            </li>
-            <li>
-              <label for="Crackle">Crackle<input type="checkbox" id="Crackle" name="Crackle" value="Crackle"></label>
-            </li>
-          </ul>
-        </fieldset>
+      <label for="stock_names">Choose the stocks you want to follow:</label>
+      <select name="stock_names" id = "stock_names" size="10" multiple>
+        {% for stock in stocks %}
+        <option value={{stock}}>{{stock}}</option>
+        {% endfor %}
+      </select>
       <br class="hidden sm:inline" />
       <br class="hidden sm:inline" />
       <input type="submit" name="sub1">
     </form>
-    <form method="POST">
-      <!--These are just placeholders for stocks. Will update once NYT.py is complete!-->
-      <summary>Choose the type of news you want to receive</summary>
-        <fieldset>
-          <ul>
-            <li>
-              <label for="Books">Books<input type="checkbox" id="Books" name="Books" value="Books"></label>
-            </li>
-            <li>
-              <label for="Movies">Movies<input type="checkbox" id="Movies" name="Movies" value="Movies"></label>
-            </li>
-            <li>
-              <label for="Sports">Sports<input type="checkbox" id="Sports" name="Sports" value="Sports"></label>
-            </li>
-          </ul>
-        </fieldset>
-      <br class="hidden sm:inline" />
-      <br class="hidden sm:inline" />
-      <input type="submit" name="sub1">
-    </form>
-  <form method=
+
+
+      <form method="POST">
+        <label for="section_names">Choose the news types you want to follow:</label>
+        <select name="section_names" id = "section_names" size="10" multiple>
+          {% for newsType in sections %}
+          <option value={{newsType}}>{{newsType}}</option>
+          {% endfor %}
+        </select>
+        <br class="hidden sm:inline" />
+        <br class="hidden sm:inline" />
+        <input type="submit" name="sub1">
+      </form>
+
+
   </body>
 </html>
