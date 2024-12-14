@@ -349,7 +349,6 @@ def getUsername(userID):
         return None
     return row[0]
 
-createTables()
 '''
 createTables()
 createUser("victor", "casado")
