@@ -60,20 +60,27 @@ def home():
         return render_template("wrong.html")
     #IF LOGGED IN
     if 'userID' in session:
+        print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         #These are templates of what we info needs to be displayed on the home page.
         today_holiday = "Friday the 13th. OOOOOOOH SPOOOOOKY"
         holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
         today_weather = "Cloudy"
         temp = "15"
-        stock_list = {'Amazon': '+5.5%', 'Buzzfeed': '-150.0%', 'Crackle': '-1000.0%'}
+
+        stock_list = db.getUserStocks(session.get('userID'))
+        stock_personal_dict = {}
+        for i in stock_list:
+            stock_personal_dict[db.getStockName(i)] = i
+
         news_list = {'From the screen': "Where's my crown that's my bling", 'To the ring': 'Always drama when I ring', 'To the pen': 'See I believe that if I see it in my heart', 'To the king': "Smash through the ceiling 'cus I'm reaching for the stars"}
-        print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         if(db.getUserCity(session.get('userID')) == ''):
             holidaylist = Calendarific.getInfo('us','ny') #REPLACE 'ny' with a fn that gets all us holidays
         else:
             holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity(session.get('userID'))])
         print("LOADED HOLIDAYS")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_list, all_news = news_list)
+        print(stock_list)
+        db.printData("stockPreferences")
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
 
     print("NOT LOGGED IN\n")
 

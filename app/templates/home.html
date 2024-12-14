@@ -71,9 +71,9 @@
             <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
               <p>Today's stock updates:</p>
               <br class="hidden sm:inline" />
-              {% for stocks, change in all_stocks.items() %}
+              {% for name, symbol in all_stocks.items() %}
               <ul>
-                <li> {{stocks}} <br class="hidden sm:inline" /><sub>{{change}}</li>
+                <li> {{name}}({{symbol}}) </li>
               </ul>
               {% endfor %}
             </div><p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}<br class="hidden sm:inline" /><sub>{{temp_info}}</sub></p>

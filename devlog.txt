@@ -102,9 +102,12 @@ marcoQ -- 2024-12-14 4:04
 * Added basic HTML templates that take in flask variables
 * Started with Tailwind CSS implementation
 
-victorC -- 2024-12-13 17:48
+victorC -- 2024-12-14 17:48
 * Removed now redundant code due to links being used instead of post requests for redirect buttons
 * Passed on a lot of data to frontend
 * Add prefs works
 * added /logout
 * other things I forgot
+
+victorC -- 2024-12-14 18:16
+* app now knows user's stock preferences

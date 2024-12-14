@@ -4,6 +4,130 @@ def getNewsSections():
     return ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion",
         "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "travel", "upshot"
     "us", "world"] #to minimize api calls
+def getStockList():
+    return [
+'AEP',
+'CCEP',
+'CMCSA',
+'SHW',
+'CDW',
+'INTU',
+'ISRG',
+'CPRT',
+'AZN',
+'ILMN',
+'TTD',
+'TXN',
+'ROP',
+'MSFT',
+'MRVL',
+'META',
+'PANW',
+'PCAR',
+'GOOGL',
+'LULU',
+'BKNG',
+'CSCO',
+'ASML',
+'KLAC',
+'TEAM',
+'COST',
+'CDNS',
+'WBD',
+'PEP',
+'ADP',
+'EA',
+'DXCM',
+'LIN',
+'EXC',
+'ZS',
+'JNJ',
+'TSLA',
+'CHTR',
+'HD',
+'MDLZ',
+'DASH',
+'ODFL',
+'REGN',
+'AMGN',
+'ANSS',
+'AMZN',
+'CTSH',
+'MELI',
+'NXPI',
+'FAST',
+'PG',
+'CEG',
+'CVX',
+'NVDA',
+'PDD',
+'NKE',
+'SNPS',
+'CRM',
+'AXP',
+'TRV',
+'MMM',
+'NFLX',
+'PYPL',
+'VRTX',
+'XEL',
+'MRK',
+'KDP',
+'TTWO',
+'DLTR',
+'ABNB',
+'DDOG',
+'BKR',
+'ADI',
+'FTNT',
+'WDAY',
+'CAT',
+'KHC',
+'QCOM',
+'SBUX',
+'BIIB',
+'PAYX',
+'TMUS',
+'HON',
+'V',
+'GS',
+'IBM',
+'WBA',
+'UNH',
+'CSGP',
+'MAR',
+'GILD',
+'ROST',
+'MCD',
+'MCHP',
+'GEHC',
+'KO',
+'ADBE,'
+'AVGO',
+'BA',
+'FANG,'
+'DIS',
+'CTAS',
+'AMAT',
+'AAPL',
+'MDB',
+'MU',
+'ARM',
+'CRWD',
+'MNST',
+'VZ',
+'ADSK'
+'WMT',
+'CSX',
+'VRSK',
+'AMD',
+'INTC',
+'MRNA',
+'IDXX',
+'JPM',
+'GFS',
+'LRCX'
+]
 def getStockDict(): #dict, key is comapny name, answer is symbol
     return {
 "American Electric Power Company, Inc.": "AEP",
@@ -189,6 +313,8 @@ def createTables():
     db.close()
 
     print("TABLES SUCCESSFULLY CREATED \n")
+def getStockName(symbol):
+    return list(getStockDict().keys())[list(getStockDict().values()).index(symbol)]
 def createUser(username, password):
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -252,12 +378,13 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
     executable = executable[:-2] + ")"
     c.execute(executable)
 
-    executable = "UPDATE stockPreferences SET "
-    for i in stockSymbols:
-        executable = executable + "'"  + i + "' = 1, "
-    executable = executable[:-2] + f" WHERE userID = {userID}"
-    print(executable)
-    c.execute(executable)
+    if(len(stockSymbols) > 0):
+        executable = "UPDATE stockPreferences SET "
+        for i in stockSymbols:
+            executable = executable + "'"  + i + "' = 1, "
+        executable = executable[:-2] + f" WHERE userID = {userID}"
+        print(executable)
+        c.execute(executable)
 
 
     query = "SELECT COUNT(*) FROM pragma_table_info('newsContentPreferences')"
@@ -273,12 +400,13 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
     executable = executable[:-2] + ")"
     c.execute(executable)
 
-    executable = "UPDATE newsContentPreferences SET "
-    for i in newsSections:
-        executable = executable + i + " = 1, "
-    executable = executable[:-2] + f" WHERE userID = {userID}"
-    #print(executable)
-    c.execute(executable)
+    if(len(newsSections) > 0):
+        executable = "UPDATE newsContentPreferences SET "
+        for i in newsSections:
+            executable = executable + i + " = 1, "
+        executable = executable[:-2] + f" WHERE userID = {userID}"
+        print(executable)
+        c.execute(executable)
 
     db.commit()
     db.close()
@@ -304,11 +432,15 @@ def getUserStocks(userID):
     c = db.cursor()
     c.execute(f"SELECT * FROM stockPreferences WHERE userID = {userID}")
     row = c.fetchone() #1st element is uid
-    stocks = getStockDict()
+    stocks = getStockList()
+    print(row)
+    print(stocks)
     returner = []
     for i in range(len(stocks)):
+        print(i)
         if(row[i+1] == 1):
             returner.append(stocks[i])
+            print(returner)
     db.close()
     return returner
 def getUserNewsSections(userID):
