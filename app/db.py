@@ -254,9 +254,9 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
 
     executable = "UPDATE stockPreferences SET "
     for i in stockSymbols:
-        executable = executable + i + " = 1, "
+        executable = executable + "'"  + i + "' = 1, "
     executable = executable[:-2] + f" WHERE userID = {userID}"
-    #print(executable)
+    print(executable)
     c.execute(executable)
 
 
@@ -267,7 +267,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
 
     c.execute(f"DELETE FROM newsContentPreferences WHERE userID = {userID}")
 
-    executable = f"INSERT INTO neORLYwsContentPreferences VALUES ({userID}, "
+    executable = f"INSERT INTO newsContentPreferences VALUES ({userID}, "
     for i in range(newsPref_column_count - 1):
         executable = executable + "0, " #row of all zeros to reset prefs
     executable = executable[:-2] + ")"

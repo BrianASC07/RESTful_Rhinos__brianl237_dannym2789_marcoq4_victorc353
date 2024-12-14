@@ -30,11 +30,11 @@
     <a href="/">
       <button type="submit" name="type" value="returnhome">Return to Homepage</button>
     </a>
-    <form method="POST">
+    <form method="POST" action="/profile">
       <label for="city_name">Choose the city you live in:</label>
       <select name="city_name" id = "city_name">
         {% for city in cities %}
-        <option value={{city}} name="city_name">{{city}}</option>
+        <option value="{{city}}">{{city}}</option>
         {% endfor %}
       </select>
       <br>
@@ -43,7 +43,7 @@
       <br>
       <select name="stock_names" id = "stock_names" size="10" multiple>
         {% for stock in stocks %}
-        <option value={{stock}}>{{stock}}</option>
+        <option value="{{stock}}">{{stock}}</option>
         {% endfor %}
       </select>
       <br class="hidden sm:inline" />
@@ -53,7 +53,7 @@
       <br class="hidden sm:inline" />
       <select name="section_names" id = "section_names" size="10" multiple>
         {% for newsType in sections %}
-        <option value={{newsType}}>{{newsType}}</option>
+        <option value="{{newsType}}">{{newsType}}</option>
         {% endfor %}
       </select>
       <br class="hidden sm:inline" />

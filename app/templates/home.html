@@ -56,11 +56,12 @@
 
         <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
         {% if loggedin %}
-          <a href="/preferences">
+          <a href="/profile">
               <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
           </a>
           <a href="/logout">
               <button type="submit" name="type" value="logoutbutton">Logout</button>
+          </a>
           </form>
           <br>
           <br>
