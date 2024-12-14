@@ -2,8 +2,23 @@
 
 <html>
   <head>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Preferences </title>
     <link rel="stylesheet" href="#" >
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -13,7 +28,24 @@
 
     <!--BUTTON TO REDIRECT TO THE HOMEPAGE (WITHOUT LOGGING IN)-->
     <form method="POST">
-      <button type="submit" name="type" value="returnhome">Return to Homepage</button>  
+      <button type="submit" name="type" value="returnhome">Return to Homepage</button>
+    </form>
+    <form method="POST">
+      <select name="test[]" size="4" multiple>
+      <option>123</option>
+      <option>456</option>
+      <option>789</option>
+      <option>123</option>
+      <option>456</option>
+      <option>789</option>
+      <option>123</option>
+      <option>456</option>
+      <option>789</option>
+      <option>123</option>
+      <option>456</option>
+      <option>789</option>
+      </select>
+      <input type="submit" name="sub1">
     </form>
   </body>
 </html>

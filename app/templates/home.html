@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="#">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
 </head>
   <body>
     <h1>Welcome to the Homepage!</h1>
-  
-    <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
-    {% if loggedin %}
-    <form method="POST">
-      <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
-    </form>
-    <form method="POST">
-      <button type="submit" name="type" value="logoutbutton">Logout</button>
-    
-    </form>
-      {% if holidays is not string %}
-        <p>Holidays in {{holidays[1]}}</p>
-        <table>
-        {% for holiday in holidays[2: ] %}
-          <tr>  
-            <td>{{ holiday }}</td>
-          </tr>
-        {% endfor %}
-        </table>
-      {% else %}
-        <p>{{holidays}}</p>
-      {% endif %}
-    
+        <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
+        {% if loggedin %}
+        <form method="POST">
+            <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
+        </form>
+        <form method="POST">
+            <button type="submit" name="type" value="logoutbutton">Logout</button>
+        </form>
+        <br>
+        <br>
+        <br>
+        <div class="grid grid-cols-4 gap-4">
+          <p class='block mt-1 ml-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is {{holiday_today}}</p>
+          <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's Stock Updates</p>
+          <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}</p>
+          <p class='block mt-1 mr-20 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today's News</p>
+        </div>
         <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
-    {% else %}
-    <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
-    <form method="POST">
-      <button type="submit" name="type" value="loginbutton">Login</button>
-    </form>
-    <br>
-    <!--BUTTON TO REDIRECT TO SIGNUP PAGE-->
-    <form method="POST">
-      <button type="submit" name="type" value="signupbutton">Sign Up</button>
-    </form>
-    {% endif %}
-    <br><br><br>
+        {% else %}
+            <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
+            <form method="POST">
+                <button type="submit" name="type" value="loginbutton">Login</button>
+            </form>
+            <br>
+            <!--BUTTON TO REDIRECT TO SIGNUP PAGE-->
+            <form method="POST">
+                <button type="submit" name="type" value="signupbutton">Sign Up</button>
+            </form>
+        {% endif %}
+        <br><br><br>
   </body>
 </html>
