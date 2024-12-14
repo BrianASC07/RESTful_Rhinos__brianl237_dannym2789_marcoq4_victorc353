@@ -86,3 +86,6 @@ brianL -- 2024-12-09 20:57
 
 victorC -- 2024-12-13 10:58
 * Init basicStockInfo table
+
+victorC --2024-12-13 19:53
+* Get city info

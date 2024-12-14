@@ -6,8 +6,13 @@ def getNewsSections():
     "us", "world"] #to minimize api calls
 def getStockList():
     return ['AEP', 'CCEP', 'CMCSA', 'SHW', 'CDW', 'INTU', 'ISRG', 'CPRT', 'AZN', 'ILMN', 'TTD', 'TXN', 'ROP', 'MSFT', 'MRVL', 'META', 'PANW', 'PCAR', 'GOOG', 'LULU', 'BKNG', 'CSCO', 'ASML', 'GOOGL', 'KLAC', 'TEAM', 'COST', 'CDNS', 'WBD', 'PEP', 'ADP', 'EA', 'DXCM', 'LIN', 'EXC', 'ZS', 'JNJ', 'TSLA', 'CHTR', 'HD', 'MDLZ', 'DASH', 'ODFL', 'REGN', 'AMGN', 'ANSS', 'AMZN', 'CTSH', 'MELI', 'NXPI', 'FAST', 'PG', 'CEG', 'CVX', 'NVDA', 'PDD', 'NKE', 'SNPS', 'CRM', 'AXP', 'TRV', 'MMM', 'NFLX', 'PYPL', 'VRTX', 'XEL', 'MRK', 'KDP', 'TTWO', 'DLTR', 'ABNB', 'DDOG', 'BKR', 'ADI', 'FTNT', 'WDAY', 'CAT', 'KHC', 'QCOM', 'SBUX', 'BIIB', 'PAYX', 'TMUS', 'HON', 'V', 'GS', 'IBM', 'WBA', 'UNH', 'CSGP', 'MAR', 'GILD', 'ROST', 'MCD', 'MCHP', 'GEHC', 'KO', 'ADBE', 'AVGO', 'BA', 'FANG', 'DIS', 'CTAS', 'AMAT', 'AAPL', 'MDB', 'MU', 'ARM', 'CRWD', 'MNST', 'VZ', 'ADSK', 'WMT', 'CSX', 'VRSK', 'AMD', 'INTC', 'MRNA', 'IDXX', 'JPM', 'GFS', 'LRCX'] #to minimize api calls
-def getStockNameList():
-    return
+def getCityList(): #2d list, 1st entry is city name, second is state
+    with open("APIModule/Cities.csv", "r") as citiesCSV:
+        csvreader = csv.reader(citiesCSV)
+        cities = []
+        for row in csvreader:
+            cities.append(row)
+        return cities
 def createTables():
     db = sqlite3.connect("RESTables.db")
     c = db.cursor()
@@ -28,8 +33,6 @@ def createTables():
                 stocksymbol UNIQUE NOT NULL
             )
         ''')#each stock is a row
-
-
     #News Preferences Info
     sections = getNewsSections()
 

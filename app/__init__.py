@@ -49,8 +49,8 @@ db.createTables()
 ##########################################
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    #if(keys_missing): #do sm #update later for all the other APIs
-    #    return render_template("wrong.html")
+    if(keys_missing):
+        return render_template("wrong.html")
     if request.method == 'POST':
         type = request.form.get("type")
         if (type == "loginbutton"):
