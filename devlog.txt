@@ -115,3 +115,6 @@ victorC -- 2024-12-14 18:16
 brianL -- 2024-12-14 20:31
 * Calendarific now correctly displays holidays based on user city or just nationally (default)
 * updated prefs to display the user's username and current settings
+
+marcoQ -- 2024-12-15 18:04
+* Updates the CSS styling for all of the html pages
