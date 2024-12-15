@@ -59,8 +59,8 @@
           <br>
           <br>
           <br>
-          <div class="flex flex-row justify-center space-x-10">
-            <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300 rounded-lg pl-5 pr-5'>
+          <div class="flex flex-row justify-center space-x-10 mx-auto overflow-hidden md:max-w-300 ">
+            <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 shadow-md rounded-lg pl-5 pr-5'>
               {% if holiday_today is string %}
               <p class="pb-5 text-center">There are no holidays today!</p>
               {% else %}
@@ -71,11 +71,11 @@
               {% endfor %}
               {% endif %}
             </div>
-            <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg">
+            <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5">
               <p class="pb-5 text-center">Today's stock updates:</p>
               {% for name, symbol in all_stocks.items() %}
               <ul>
-                <li class="pl-5 pr-5"><a href=# class="hover:underline"> {{name}}</a>({{symbol}}): +/- </li> <!-- Change this to /stocks once that is done !-->
+                <li><a href=# class="hover:underline"> {{name}}</a>({{symbol}}): +/- </li> <!-- Change this to /stocks once that is done !-->
               </ul>
               {% endfor %}
             </div>

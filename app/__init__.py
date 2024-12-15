@@ -62,6 +62,8 @@ def home():
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         #These are templates of what we info needs to be displayed on the home page.
+        city_name = "Placeholder City" #If anyone knows how to call this, please change it
+        state_name = "Placeholder State"
         today_weather = "Cloudy"
         temp = "15"
 
@@ -82,7 +84,7 @@ def home():
         print("LOADED HOLIDAYS")
         print(stock_list)
         db.printData("stockPreferences")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, city = city_name, state = state_name, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
 
     print("NOT LOGGED IN\n")
 
