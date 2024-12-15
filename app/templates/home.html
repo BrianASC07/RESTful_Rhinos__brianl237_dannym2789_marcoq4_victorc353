@@ -12,7 +12,6 @@
         theme: {
           extend: {
             colors: {
-              clifford: '#da373d',
               weezer: '#189bcc'
             }
           }
@@ -23,9 +22,9 @@
   <body>
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <p class="flex items-center space-x-3 rtl:space-x-reverse">
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">The Keratin Chronicle</span>
-      </a>
+      </p>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
           <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -34,20 +33,20 @@
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          {% if loggedin %}
           <li>
-            <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-weezer md:p-0 dark:text-white" aria-current="page">Home</a>
+            <a href="/logout" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-weezer md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="/login" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-weezer md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
           </li>
           <li>
-            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+            <a href="signup" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-weezer md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Signup</a>
           </li>
+          {% endif %}
           <li>
-            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+            <a href="/profile" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-weezer md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
           </li>
         </ul>
       </div>
@@ -56,59 +55,49 @@
 
         <!--ONLY LOADED IF USERNAME IS IN SESSION (DASHBOARD STUFF)-->
         {% if loggedin %}
-          <a href="/profile">
-              <button type="submit" name="type" value="profilebutton">Go to Your Profile</button>
-          </a>
-          <a href="/logout">
-              <button type="submit" name="type" value="logoutbutton">Logout</button>
-          </a>
           </form>
           <br>
           <br>
           <br>
-          <div class="flex flex-row justify-center items-center space-x-20">
-            <div class='bg-slate-300'>
+          <div class="flex flex-row justify-center space-x-10">
+            <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300 rounded-lg pl-5 pr-5'>
               {% if holiday_today is string %}
-              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>There are no holidays today!<br class="hidden sm:inline" /></p>
+              <p class="pb-5 text-center">There are no holidays today!</p>
               {% else %}
-              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is: <br class="hidden sm:inline" /></p>
+              <p class="pb-5 text-center">Today is:</p>
               {% set holidayinfolist = holiday_stuff %}
               {% for holiday in holiday_today %}
-                <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>{{holiday}}<br class="hidden sm:inline" /><sub>{{holidayinfolist[loop.index0]}}</sub></p>
+              <p>{{holiday}}<br class="hidden sm:inline" /><sub>{{holidayinfolist[loop.index0]}}</sub></p>
               {% endfor %}
               {% endif %}
             </div>
-            <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
-              <p>Today's stock updates:</p>
-              <br class="hidden sm:inline" />
+            <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg">
+              <p class="pb-5 text-center">Today's stock updates:</p>
               {% for name, symbol in all_stocks.items() %}
               <ul>
-                <li> {{name}}({{symbol}}) </li>
+                <li class="pl-5 pr-5"><a href=# class="hover:underline"> {{name}}</a>({{symbol}}): +/- </li> <!-- Change this to /stocks once that is done !-->
               </ul>
               {% endfor %}
-            </div><p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today Forecast: {{weather_main}}<br class="hidden sm:inline" /><sub>{{temp_info}}</sub></p>
-            <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
-              <p>Today's News</p>
-              <br class="hidden sm:inline" />
+            </div>
+            <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5'>
+              <p class='pb-5'>Today's Forecast: </p>
+              <p>{{city}}, {{state}}<p>
+              <p>{{weather_main}}</p>
+              <p>Temp: {{temp_info}}</p>
+              <p>Feels like: {{feels_like_info}}</p>
+            </div>
+            <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5">
+              <p class="pb-5 text-center">Today's News</p>
               {% for headline, descriptions in all_news.items() %}
               <ul>
-                <li> {{headline}} <br class="hidden sm:inline" /><sub>{{descriptions}}</li>
+                <li> <a href= "#" class="hover:underline">{{headline}}</a> <br class="hidden sm:inline" /><sub>{{descriptions}}</li>
               </ul>
               {% endfor %}
             </div>
           </div>
 
-        <!--ONLY LOADED IF USERNAME IS NOT IN SESSION (LOGIN/REGISTER BUTTONS)-->
         {% else %}
-            <!--BUTTON TO REDIRECT TO LOGIN PAGE-->
-            <a href="/login">
-                <button type="submit" name="type" value="loginbutton">Login</button>
-            </a>
-            <br>
-            <!--BUTTON TO REDIRECT TO SIGNUP PAGE-->
-            <a href="/signup">
-                <button type="submit" name="type" value="signupbutton">Sign Up</button>
-            </a>
+          <h2 class = "text-center mt-10 text-3xl"> Welcome! Please log in or sign up to view your preferred content. </h2>
         {% endif %}
         <br><br><br>
   </body>
