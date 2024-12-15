@@ -67,7 +67,17 @@
           <br>
           <br>
           <div class="flex flex-row justify-center items-center space-x-20">
-            <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is {{holiday_today}}<br class="hidden sm:inline" /><sub>{{holiday_stuff}}</sub></p>
+            <div class='bg-slate-300'>
+              {% if holiday_today is string %}
+              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>There are no holidays today!<br class="hidden sm:inline" /></p>
+              {% else %}
+              <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>Today is: <br class="hidden sm:inline" /></p>
+              {% set holidayinfolist = holiday_stuff %}
+              {% for holiday in holiday_today %}
+                <p class='block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300'>{{holiday}}<br class="hidden sm:inline" /><sub>{{holidayinfolist[loop.index0]}}</sub></p>
+              {% endfor %}
+              {% endif %}
+            </div>
             <div class = "flew flex-col block mt-1 text-clifford md:text-lg lg:text-xl leading-tight font-medium hover:underline bg-slate-300">
               <p>Today's stock updates:</p>
               <br class="hidden sm:inline" />

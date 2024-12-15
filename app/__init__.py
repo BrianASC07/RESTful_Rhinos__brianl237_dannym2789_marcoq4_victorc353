@@ -62,8 +62,6 @@ def home():
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         #These are templates of what we info needs to be displayed on the home page.
-        today_holiday = "Friday the 13th. OOOOOOOH SPOOOOOKY"
-        holiday_info = "Friday the 13th falling on a December this year is kind of crazy."
         today_weather = "Cloudy"
         temp = "15"
 
@@ -74,13 +72,17 @@ def home():
 
         news_list = {'From the screen': "Where's my crown that's my bling", 'To the ring': 'Always drama when I ring', 'To the pen': 'See I believe that if I see it in my heart', 'To the king': "Smash through the ceiling 'cus I'm reaching for the stars"}
         if(db.getUserCity(session.get('userID')) == ''):
-            holidaylist = Calendarific.getInfo('us','ny') #REPLACE 'ny' with a fn that gets all us holidays
+            today_holiday = Calendarific.getHoliday("")
+            holiday_info =  Calendarific.getHolidayInfo("")
         else:
-            holidaylist = Calendarific.getInfo('us',db.getCityDict()[db.getUserCity(session.get('userID'))])
+            today_holiday = Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
+            holiday_info =  Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
+        if len(today_holiday) == 0:
+            today_holiday = "There are no holidays today!"
         print("LOADED HOLIDAYS")
         print(stock_list)
         db.printData("stockPreferences")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff = holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
 
     print("NOT LOGGED IN\n")
 
@@ -147,12 +149,17 @@ def profile():
 def prefs():
     if request.method == 'POST':
         print("RECEIVING DATA")
-
     print("ARRIVED AT PREFERENCE CHANGE PAGE")
     stockList = list(db.getStockDict().keys())
     newsSectionList = db.getNewsSections()
     cityList = list(db.getCityDict().keys())
-    return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList)
+    user = db.getUsername(session.get('userID'))
+    locationPrefs = db.getUserCity(session.get('userID'))
+    newsSectionPrefs = db.getUserNewsSections(session.get('userID'))
+    stockPrefs = db.getUserStocks(session.get('userID'))
+    print("printing db")
+    db.printData("userData")
+    return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList, username = user, userlocation = locationPrefs, usernews = newsSectionPrefs, userstocks = stockPrefs)
 ##########################################
 @app.route("/logout")
 def logout():
@@ -161,4 +168,4 @@ def logout():
 ##########################################
 if __name__ == "__main__":
     app.debug = True
-    app.run(use_reloader=False, debug=False)
+    app.run()#use_reloader=False, debug=False

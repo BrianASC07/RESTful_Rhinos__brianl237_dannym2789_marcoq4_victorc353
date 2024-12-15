@@ -22,14 +22,14 @@
   </head>
 
   <body>
-    <h1>Change Your User Preferences</h1>
+    <h1>Change User Preferences for {{username}}</h1>
+    <br><p>Here are your current settings!</p>
+    <p>City: {{userlocation}}</p>
+    <p>News Sections: {{usernews|join(', ')}}</p>
+    <p>Stocks: {{userstocks|join(", ")}}</p>
+
     <br><p>You have to choose each type individually <br> Hold Left Control to select multiple</p>
     <br>
-
-    <!--BUTTON TO REDIRECT TO THE HOMEPAGE (WITHOUT LOGGING IN)-->
-    <a href="/">
-      <button type="submit" name="type" value="returnhome">Return to Homepage</button>
-    </a>
     <form method="POST" action="/profile">
       <label for="city_name">Choose the city you live in:</label>
       <select name="city_name" id = "city_name">
@@ -59,6 +59,10 @@
       <br class="hidden sm:inline" />
       <br class="hidden sm:inline" />
       <input type="submit" name="sub1">
+      <br>
+      <a href="/">
+        <button type="submit" name="type" value="returnhome">Return to Homepage</button>
+      </a>
     </form>
 
 
