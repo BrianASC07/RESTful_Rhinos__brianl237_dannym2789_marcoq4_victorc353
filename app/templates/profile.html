@@ -24,11 +24,25 @@
   <body>
     <h1>This is You</h1>
     <br>
+    <p>Preferred City: {{pref_city}}</p>
+    <p>Preferred stock lists:</p>
+    <ul>
+      {% for stock in pref_stocks %}
+      <li>{{stock}}</li>
+      {% endfor %}
+    </ul>
+    <br>
+    <p>Preferred news sections:</p>
+    <ul>
+      {% for section in news_sections %}
+      <li>{{section}}</li>
+      {% endfor %}
+    </ul>
+    <br>
     <a href="/preferences">
       <button type="submit" name="type" value="prefsbutton">Change What You See!</button>
     </a>
     <br>
-
     <!--BUTTON TO REDIRECT TO THE HOMEPAGE (WITHOUT LOGGING IN)-->
     <a href="/">
       <button type="submit" name="type" value="returnhome">Return to Homepage</button>

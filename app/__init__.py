@@ -128,13 +128,15 @@ def signup():
 ##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
+    city = ""
+    stocks = []
+    news = []
     if request.method == 'POST':
         id = session.get('userID')
         city = request.form.get('city_name')
         stockNames = request.form.getlist('stock_names')
         news = request.form.getlist('section_names')
         stockDict = db.getStockDict()
-        stocks = []
         for i in stockNames:
             stocks.append(stockDict[f"{i}"])
         print("ID: " + str(id))
@@ -142,8 +144,8 @@ def profile():
         print("STOCKS: " + str(stocks))
         print("NEWS SECTIONS: " + str(news))
         db.addPrefs(id, city, stocks, news)
-    print("ARRIVED AT PROFILE PAGE")
-    return render_template('profile.html')
+        print("ARRIVED AT PROFILE PAGE")
+    return render_template('profile.html', pref_city = city, pref_stocks = stocks, news_sections = news)
 ##########################################
 @app.route("/preferences", methods=['GET', 'POST'])
 def prefs():
