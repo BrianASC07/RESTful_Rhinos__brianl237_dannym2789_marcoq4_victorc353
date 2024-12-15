@@ -31,7 +31,7 @@ def getHoliday(state):
     
 
 def getHolidayInfo(state):
-    #try:
+    try:
         current_time = datetime.datetime.now()
 
         file = open("../keys/key_Calendarific.txt", "r")
@@ -54,5 +54,5 @@ def getHolidayInfo(state):
                 return list
             else: #fallback for if the response code isn't 200
                 return "Sorry, the Calendarific API is currently unavailable"
-    #except: # catches all other errors
-    #    return "Sorry, an error occured with the Calendarific API"
+    except: # catches all other errors
+        return "Sorry, an error occured with the Calendarific API"
