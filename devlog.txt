@@ -111,3 +111,7 @@ victorC -- 2024-12-14 17:48
 
 victorC -- 2024-12-14 18:16
 * app now knows user's stock preferences
+
+brianL -- 2024-12-14 20:31
+* Calendarific now correctly displays holidays based on user city or just nationally (default)
+* updated prefs to display the user's username and current settings
