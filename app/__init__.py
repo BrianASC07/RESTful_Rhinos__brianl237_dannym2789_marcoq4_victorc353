@@ -62,7 +62,6 @@ def home():
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
 
-
         stock_list = db.getUserStocks(session.get('userID'))
         stock_personal_dict = {}
         for i in stock_list:
@@ -138,14 +137,17 @@ def signup():
     if request.method == 'POST':
         username = request.form.get("user")
         password = request.form.get("password")
-        db.createUser(username, password)
-        session['userID'] = db.getUserID(username)
-        print("SIGNED UP SUCCESSFULLY... GOING HOME")
-        return redirect(url_for('home'))
+        if db.createUser(username, password):
+            session['userID'] = db.getUserID(username)
+            print("SIGNED UP SUCCESSFULLY... GOING HOME")
+            return redirect(url_for('prefs'))
+        else:
+            print("UNSUCCESSFUL SIGNUP")
+            return render_template('signup.html', message = "Unsuccessful Signup, Please Try Again")
 
 
     print("ARRIVED AT SIGNUP PAGE")
-    return render_template('signup.html')
+    return render_template('signup.html', message = "")
 ##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -193,4 +195,4 @@ def logout():
 ##########################################
 if __name__ == "__main__":
     app.debug = True
-    app.run()#use_reloader=False, debug=False
+    app.run(use_reloader=False, debug=False)
