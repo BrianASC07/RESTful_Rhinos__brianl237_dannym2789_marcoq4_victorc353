@@ -147,7 +147,9 @@ def profile():
         print("NEWS SECTIONS: " + str(news))
         db.addPrefs(id, city, stocks, news)
         print("ARRIVED AT PROFILE PAGE")
-    return render_template('profile.html', pref_city = city, pref_stocks = stocks, news_sections = news)
+    user = db.getUsername(session.get('userID'))
+
+    return render_template('profile.html', pref_city = city, pref_stocks = stocks, news_sections = news, username = user)
 ##########################################
 @app.route("/preferences", methods=['GET', 'POST'])
 def prefs():
