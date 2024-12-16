@@ -4,6 +4,8 @@ from urllib.request import urlopen
 import json
 import datetime
 import os
+import matplotlib.pyplot as plt
+import datetime
 
 def getName(stockSymbol): #called in createtables
     url = f"https://financialmodelingprep.com/api/v3/profile/{stockSymbol}?apikey="
@@ -42,9 +44,6 @@ def getHistoricalStockData(stockSymbol): #maybe expand to diff time frames in fu
               print(f'Failed to retrieve data {response.status_code}')
     except Exception as e:
        return "Failed"
-
-#print(getHistoricalStockData('AAPL'))
-
 def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists do not call tho!!!
    url = f"https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
@@ -65,7 +64,6 @@ def getNasdaqList(): #api does not allow s&p 500 list, so will add dow jones and
               print(f'Failed to retrieve data {response.status_code}')
    except Exception as e:
        return "Failed"
-
 def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones and nasdaq lists do not call tho!!!
    url = f"https://financialmodelingprep.com/api/v3/dowjones_constituent?apikey="
    FMP = open("../keys/key_FMP.txt", "r");
@@ -86,10 +84,20 @@ def getDowJonesList(): #api does not allow s&p 500 list, so will add dow jones a
               print(f'Failed to retrieve data {response.status_code}')
    except Exception as e:
        return "Failed"
-
 def getCompanySymbolList(): #do not call
     return getNasdaqList().union(getDowJonesList()) #NOTICE that this returns a set, not a list
-
+def getPlot(stockSymbol):
+    data = getHistoricalStockData(stockSymbol)
+    dates = []
+    values = []
+    for i in data:
+        dates.append(datetime.datetime.strptime(i[0][:-9], '%Y-%m-%d'))
+        values.append(i[1])
+    plt.plot(dates, values, 'g')
+    plt.xticks(rotation=70)
+    plt.subplots_adjust(bottom=0.15)
+    plt.savefig(f'{stockSymbo}.png')
+#print(getPlot("AAPL"))
 #print(getNasdaqList())
 #print(getDowJonesList())
 #print(getCompanySymbolList())

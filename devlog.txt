@@ -127,3 +127,8 @@ dannyM -- 2024-12-15 20:08
 * Added in the rest of the NYT API functionalities: getting links and article titles from popular articles, newsdesk tagged articles and section tagged articles
 * Added in Cities.csv and Secitons.csv
 * Added NYT module to __init__.py
+
+victorC -- 2024-12-15 10:39
+* Signup now prevents duplicate users
+* Database no longer locks
+* FMP function to create plot
