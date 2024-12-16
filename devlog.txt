@@ -118,3 +118,7 @@ brianL -- 2024-12-14 20:31
 
 marcoQ -- 2024-12-15 18:04
 * Updates the CSS styling for all of the html pages
+
+brianL -- 2024-12-15 19:33
+* Moved a button in the homepage for better clarity
+* Profile page now correctly displays username
