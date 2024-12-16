@@ -4,7 +4,7 @@ import urllib.request
 from flask import Flask, render_template, url_for, session, request, redirect
 from APIModule import OWM, Calendarific, FMP, NYT
 import db
-
+import time
 #KEY TESTING
 keys_missing = False
 FMP_key = ""
@@ -12,8 +12,8 @@ Open_Weather_Map_key = ""
 NYT_key = ""
 Calendarific_key = ""
 try:
-    FMP = open("../keys/key_FMP.txt", "r")
-    FMP_key = FMP.read()
+    FMP_file = open("../keys/key_FMP.txt", "r")
+    FMP_key = FMP_file.read()
     print("\nFMP KEY LOADED")
 
     New_York_Times = open("../keys/key_NYT.txt", "r")
@@ -98,10 +98,10 @@ def home():
             today_holiday = "There are no holidays today!"
         print("LOADED HOLIDAYS")
         print(stock_list)
-        db.printData("stockPreferences")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, 
-                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp, weather_desc = weather_desc, 
-                               all_stocks = stock_personal_dict, 
+        #db.printData("stockPreferences")
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info,
+                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp, weather_desc = weather_desc,
+                               all_stocks = stock_personal_dict,
                                all_news = news_list)
 
     print("NOT LOGGED IN\n")
@@ -149,6 +149,22 @@ def signup():
     print("ARRIVED AT SIGNUP PAGE")
     return render_template('signup.html', message = "")
 ##########################################
+@app.route("/stock", methods=['GET','POST'])
+def stockPage():
+    if request.method == 'POST':
+        if os.path.exists("static/img.png"):
+          os.remove("static/img.png")
+        name = request.form.get("name")
+        dict = db.getStockDict()
+        FMP.getStockPlot(dict[name], name)
+        session['stockName'] = name
+        return render_template('stock.html', stock_name=name)
+    name = session['stockName']
+    session.pop('stockName')
+    print(url_for('static', filename='img.png'))
+    return render_template('stock.html', stock_name = name)
+
+##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
     city = ""
@@ -185,7 +201,7 @@ def prefs():
     newsSectionPrefs = db.getUserNewsSections(session.get('userID'))
     stockPrefs = db.getUserStocks(session.get('userID'))
     print("printing db")
-    db.printData("userData")
+    #db.printData("userData")
     return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList, username = user, userlocation = locationPrefs, usernews = newsSectionPrefs, userstocks = stockPrefs)
 ##########################################
 @app.route("/logout")

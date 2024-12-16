@@ -132,3 +132,6 @@ victorC -- 2024-12-15 10:39
 * Signup now prevents duplicate users
 * Database no longer locks
 * FMP function to create plot
+
+victorC --2024-12-16 15:10
+* Pyplot graphs displayed for stock pages

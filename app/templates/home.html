@@ -75,7 +75,8 @@
               <p class="pb-5 text-center">Today's stock updates:</p>
               {% for name, symbol in all_stocks.items() %}
               <ul>
-                <li><a href=# class="hover:underline"> {{name}}</a>({{symbol}})</li>
+                <form action="/stock" method="POST">
+                  <button class="hover:underline" type="submit" name="name" value = "{{name}}">{{name}}({{symbol}})</input>
               </ul>
               {% endfor %}
             </div>
