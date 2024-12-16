@@ -61,11 +61,7 @@ def home():
     #IF LOGGED IN
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
-        #These are templates of what we info needs to be displayed on the home page.
-        city_name = "Placeholder City" #If anyone knows how to call this, please change it
-        state_name = "Placeholder State"
-        today_weather = "Cloudy"
-        temp = "15"
+
 
         stock_list = db.getUserStocks(session.get('userID'))
         stock_personal_dict = {}
@@ -74,17 +70,40 @@ def home():
 
         news_list = {'From the screen': "Where's my crown that's my bling", 'To the ring': 'Always drama when I ring', 'To the pen': 'See I believe that if I see it in my heart', 'To the king': "Smash through the ceiling 'cus I'm reaching for the stars"}
         if(db.getUserCity(session.get('userID')) == ''):
+            #FOR CALENDARIFIC
             today_holiday = Calendarific.getHoliday("")
             holiday_info =  Calendarific.getHolidayInfo("")
+            #FOR OWM
+            city_name = "Please set your location preferences in settings"
+            state_name = ""
+            temp = ''
+            feel_temp = ''
+            weather = ''
+            weather_desc = ''
+            #FOR FMP
         else:
+            #FOR CALENDARIFIC
             today_holiday = Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
             holiday_info =  Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
+            #FOR OWM
+            city_name = db.getUserCity(session.get('userID'))
+            state_name = db.getCityDict()[db.getUserCity(session.get('userID'))].upper()
+            temp = str(round(OWM.getTemp(city_name) - 273, 1)) + "C"
+            feel_temp = str(round(OWM.getFeelsLike(city_name) - 273, 1)) + "C"
+            weather = OWM.getMain(city_name)
+            weather_desc = OWM.getDescription(city_name)
+            #FOR FMP
+
+
         if len(today_holiday) == 0:
             today_holiday = "There are no holidays today!"
         print("LOADED HOLIDAYS")
         print(stock_list)
         db.printData("stockPreferences")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, city = city_name, state = state_name, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, 
+                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp, weather_desc = weather_desc, 
+                               all_stocks = stock_personal_dict, 
+                               all_news = news_list)
 
     print("NOT LOGGED IN\n")
 
