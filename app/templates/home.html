@@ -75,13 +75,13 @@
               <p class="pb-5 text-center">Today's stock updates:</p>
               {% for name, symbol in all_stocks.items() %}
               <ul>
-                <li><a href=# class="hover:underline"> {{name}}</a>({{symbol}})</li> 
+                <li><a href=# class="hover:underline"> {{name}}</a>({{symbol}})</li>
               </ul>
               {% endfor %}
             </div>
             <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5'>
               <p class='pb-5'>Today's Forecast: </p>
-              <p>{{city}}, {{state}}<p>
+              <p>{{city}}{{state}}<p>
               <p>{{weather_main}}</p>
               <p>Temp: {{temp_info}}</p>
               <p>Feels like: {{feels_like_info}}</p>

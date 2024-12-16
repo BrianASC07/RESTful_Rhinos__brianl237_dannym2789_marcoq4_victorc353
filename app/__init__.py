@@ -62,8 +62,11 @@ def home():
     if 'userID' in session:
         print("ALREADY LOGGED IN... USERID: " + str(session.get('userID')))
         #These are templates of what we info needs to be displayed on the home page.
-        city_name = "Placeholder City" #If anyone knows how to call this, please change it
-        state_name = "Placeholder State"
+        city_name = db.getUserCity(session.get('userID'))
+        if(city_name == ''):
+            state_name = ''
+        else:
+            state_name = db.getCityDict()[city_name]
         today_weather = "Cloudy"
         temp = "15"
 
@@ -77,14 +80,14 @@ def home():
             today_holiday = Calendarific.getHoliday("")
             holiday_info =  Calendarific.getHolidayInfo("")
         else:
-            today_holiday = Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
-            holiday_info =  Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
+            today_holiday = Calendarific.getHoliday(state_name)
+            holiday_info =  Calendarific.getHolidayInfo(state_name)
         if len(today_holiday) == 0:
             today_holiday = "There are no holidays today!"
         print("LOADED HOLIDAYS")
         print(stock_list)
         db.printData("stockPreferences")
-        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, city = city_name, state = state_name, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
+        return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info, city = city_name + ", ", state = state_name, weather_main = today_weather, temp_info = temp, all_stocks = stock_personal_dict, all_news = news_list)
 
     print("NOT LOGGED IN\n")
 
@@ -119,14 +122,17 @@ def signup():
     if request.method == 'POST':
         username = request.form.get("user")
         password = request.form.get("password")
-        db.createUser(username, password)
-        session['userID'] = db.getUserID(username)
-        print("SIGNED UP SUCCESSFULLY... GOING HOME")
-        return redirect(url_for('home'))
+        if db.createUser(username, password):
+            session['userID'] = db.getUserID(username)
+            print("SIGNED UP SUCCESSFULLY... GOING HOME")
+            return redirect(url_for('prefs'))
+        else:
+            print("UNSUCCESSFUL SIGNUP")
+            return render_template('signup.html', message = "Unsuccessful Signup, Please Try Again")
 
 
     print("ARRIVED AT SIGNUP PAGE")
-    return render_template('signup.html')
+    return render_template('signup.html', message = "")
 ##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -174,4 +180,4 @@ def logout():
 ##########################################
 if __name__ == "__main__":
     app.debug = True
-    app.run()#use_reloader=False, debug=False
+    app.run(use_reloader=False, debug=False)

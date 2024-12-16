@@ -356,6 +356,7 @@ def createUser(username, password):
         return True
     except Exception as e:
         print(e)
+        db.close()
         return False
 def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSections are lists of strings; if no city, pass "", if no stocks, sections, pass []
     db = sqlite3.connect("RESTables.db")
@@ -383,7 +384,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
         for i in stockSymbols:
             executable = executable + "'"  + i + "' = 1, "
         executable = executable[:-2] + f" WHERE userID = {userID}"
-        print(executable)
+        #print(executable)
         c.execute(executable)
 
 
@@ -405,7 +406,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
         for i in newsSections:
             executable = executable + i + " = 1, "
         executable = executable[:-2] + f" WHERE userID = {userID}"
-        print(executable)
+        #print(executable)
         c.execute(executable)
 
     db.commit()
@@ -433,14 +434,14 @@ def getUserStocks(userID):
     c.execute(f"SELECT * FROM stockPreferences WHERE userID = {userID}")
     row = c.fetchone() #1st element is uid
     stocks = getStockList()
-    print(row)
-    print(stocks)
+    #print(row)
+    #print(stocks)
     returner = []
     for i in range(len(stocks)):
-        print(i)
+        #print(i)
         if(row[i+1] == 1):
             returner.append(stocks[i])
-            print(returner)
+            #print(returner)
     db.close()
     return returner
 def getUserNewsSections(userID):
