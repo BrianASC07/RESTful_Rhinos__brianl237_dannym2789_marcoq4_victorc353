@@ -135,3 +135,6 @@ victorC -- 2024-12-15 10:39
 
 victorC --2024-12-16 15:10
 * Pyplot graphs displayed for stock pages
+
+dannyM -- 2024-12-16 10:55
+* updated DB
