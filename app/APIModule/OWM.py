@@ -7,8 +7,8 @@ api_key = file.read().strip()
 
 def getTemp(location):
         if (location.find(' ') != -1):
-            location = location[0: location.find(' ')] + '_' + location[locatio.find(' '):]
-        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location}&limit=5&appid=" + api_key) as response:
+            location = location[0: location.find(' ')] + '_' + location[location.find(' ') + 1:]
+        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location},US&limit=5&appid=" + api_key) as response:
             coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
             #print(data)
             latURL = coords[0]["lat"]
@@ -23,8 +23,8 @@ def getTemp(location):
 
 def getFeelsLike(location):
         if (location.find(' ') != -1):
-            location = location[0: location.find(' ')] + '_' + location[locatio.find(' '):]
-        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location}&limit=5&appid=" + api_key) as response:
+            location = location[0: location.find(' ')] + '_' + location[location.find(' ') + 1:]
+        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location},US&limit=5&appid=" + api_key) as response:
             coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
             #print(data)
             latURL = coords[0]["lat"]
@@ -39,8 +39,8 @@ def getFeelsLike(location):
 
 def getMain(location):
         if (location.find(' ') != -1):
-            location = location[0: location.find(' ')] + '_' + location[locatio.find(' '):]
-        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location}&limit=5&appid=" + api_key) as response:
+            location = location[0: location.find(' ')] + '_' + location[location.find(' ') + 1:]
+        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location},US&limit=5&appid=" + api_key) as response:
             coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
             #print(data)
             latURL = coords[0]["lat"]
@@ -48,15 +48,15 @@ def getMain(location):
 
         with urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?lat={latURL}&lon={lonURL}&appid=" + api_key) as response:
             data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
-            return data["weather"]["main"]
+            return data["weather"][0]["main"]
             #print(data)
             #print(coords["lat"])
             #print(coords[0])
 
 def getDescription(location):
         if (location.find(' ') != -1):
-            location = location[0: location.find(' ')] + '_' + location[locatio.find(' '):]
-        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location}&limit=5&appid=" + api_key) as response:
+            location = location[0: location.find(' ')] + '_' + location[location.find(' ') + 1:]
+        with urllib.request.urlopen(f"http://api.openweathermap.org/geo/1.0/direct?q={location},US&limit=5&appid=" + api_key) as response:
             coords = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
             #print(data)
             latURL = coords[0]["lat"]
@@ -64,7 +64,7 @@ def getDescription(location):
 
         with urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?lat={latURL}&lon={lonURL}&appid=" + api_key) as response:
             data = json.loads(response.read()) #reads the page's source code and converts to python dictionary in the same line
-            return data["weather"]["description"]
+            return data["weather"][0]["description"]
             #print(data)
             #print(coords["lat"])
             #print(coords[0])
