@@ -474,7 +474,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
         for i in newsSections:
             executable = executable + i + " = 1, "
         executable = executable[:-2] + f" WHERE userID = {userID}"
-        #print(executable)
+        print(executable)
         c.execute(executable)
 
     db.commit()
