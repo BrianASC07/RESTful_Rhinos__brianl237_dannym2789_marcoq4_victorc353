@@ -122,3 +122,8 @@ marcoQ -- 2024-12-15 18:04
 brianL -- 2024-12-15 19:33
 * Moved a button in the homepage for better clarity
 * Profile page now correctly displays username
+
+dannyM -- 2024-12-15 20:08
+* Added in the rest of the NYT API functionalities: getting links and article titles from popular articles, newsdesk tagged articles and section tagged articles
+* Added in Cities.csv and Secitons.csv
+* Added NYT module to __init__.py
