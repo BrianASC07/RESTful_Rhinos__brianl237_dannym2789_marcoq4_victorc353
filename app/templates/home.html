@@ -86,24 +86,24 @@
               <p>{{weather_main}}</p>
               <p>{{weather_desc}}</p>
               <div class = "items-center">
-                {% if weather_desc == "mist" %}
-                  <img src="https://openweathermap.org/img/wn/50d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "clear sky" %}
+                {% if weather_desc == "clear sky" %}
                   <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="{{weather_desc}} Icon">
                 {% elif weather_desc == "few clouds" %}
                   <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="{{weather_desc}} Icon">
                 {% elif weather_desc == "scattered clouds" %}
                   <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "broken clouds" %}
+                {% elif weather_desc == "broken clouds" or weather_desc == "overcast clouds"%}
                   <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "shower rain" %}
+                {% elif "drizzle" in weather_desc %}
                   <img src="https://openweathermap.org/img/wn/09d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "light rain" %}
+                {% elif "rain" in weather_desc %}
                   <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "thunderstorm" %}
+                {% elif "thunderstorm" in weather_desc %}
                   <img src="https://openweathermap.org/img/wn/11d@2x.png" alt="{{weather_desc}} Icon">
-                {% elif weather_desc == "snow"%}
+                {% elif "snow" in weather_desc or "sleet" in weather_desc%}
                   <img src="https://openweathermap.org/img/wn/13d@2x.png" alt="{{weather_desc}} Icon">
+                {% else %}
+                  <img src="https://openweathermap.org/img/wn/50d@2x.png" alt="{{weather_desc}} Icon">
                 {% endif %}
               </div>
               <p>Temp: {{temp_info}}</p>
