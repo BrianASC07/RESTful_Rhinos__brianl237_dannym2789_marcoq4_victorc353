@@ -59,7 +59,7 @@
           <br>
           <br>
           <br>
-          <div class="flex flex-row justify-center space-x-10 mx-auto overflow-hidden md:max-w-300">
+          <div class="flex flex-row justify-center space-x-10 mx-auto overflow-hidden md:max-w-300 w-auto">
             <div class='block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 shadow-md rounded-lg pl-5 pr-5 w-1/4'>
               {% if holiday_today is string %}
               <p class="pb-5 text-center">There are no holidays today!</p>
@@ -84,6 +84,28 @@
               <p class='pb-5'>Today's Forecast: </p>
               <p>{{city}}, {{state}}<p>
               <p>{{weather_main}}</p>
+              <p>{{weather_desc}}</p>
+              <div class = "items-center">
+                {% if weather_desc == "mist" %}
+                  <img src="https://openweathermap.org/img/wn/50d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "clear sky" %}
+                  <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "few clouds" %}
+                  <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "scattered clouds" %}
+                  <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "broken clouds" %}
+                  <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "shower rain" %}
+                  <img src="https://openweathermap.org/img/wn/09d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "light rain" %}
+                  <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "thunderstorm" %}
+                  <img src="https://openweathermap.org/img/wn/11d@2x.png" alt="{{weather_desc}} Icon">
+                {% elif weather_desc == "snow"%}
+                  <img src="https://openweathermap.org/img/wn/13d@2x.png" alt="{{weather_desc}} Icon">
+                {% endif %}
+              </div>
               <p>Temp: {{temp_info}}</p>
               <p>Feels like: {{feel_temp}}</p>
             </div>
