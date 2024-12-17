@@ -110,10 +110,11 @@
               <p>Feels like: {{feel_temp}}</p>
             </div>
             <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5">
-              <p class="pb-5 text-center">Today's News</p>
+              <p class="pb-5 text-center">YOUR News</p>
               {% for n in range(all_news.Headings|length - 1) %}
               <ul>
                 <li> <a href= '{{all_news.Link[n]}}' class="hover:underline">{{all_news.Headings[n]}}</a> <br class="hidden sm:inline" /><sub>{{all_news.Desc[n]}}</li>
+                <br>
               </ul>
               {% endfor %}
             </div>

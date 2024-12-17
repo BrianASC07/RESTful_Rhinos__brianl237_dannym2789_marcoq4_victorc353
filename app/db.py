@@ -47,7 +47,6 @@ def getNewsSections():
     "Sunday Magazine",
     "Sunday Review",
     "T Magazine",
-    "T:Style",
     "Technology",
     "The Public Editor",
     "The Upshot",

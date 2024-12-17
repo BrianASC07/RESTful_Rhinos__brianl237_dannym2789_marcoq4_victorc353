@@ -58,7 +58,7 @@ def getPopular(type, period):
 
 def getSection(section):
     input = ""
-    urlTemp = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name:"
+    urlTemp = "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name"
     apikey = open("../keys/key_NYT.txt", "r").read().strip()
 
     if len(apikey) < 1: # Checks for blank API key
@@ -73,32 +73,34 @@ def getSection(section):
         for i in read:
             sectionList.append(i[0])
     
+    #print(sectionList)
     # Checks if the section parameter is in the sSections csv file
     if (section not in sectionList):
         print("invalid section")
         return
     
-    urlTemp += f'("{section}")&api-key={apikey}'
+    urlTemp += f'("{section}")&api-key={apikey}'.replace(" ", "%20")
+    #print(urlTemp)
     
-    try:
-        with urllib.request.urlopen(urlTemp) as response:
-            if (response.getcode() == 200):
-                data = json.loads(response.read())
-                output = {"Title": [], "Details": [], "URL":[]}
-                for i in data["response"]["docs"]:
-                    output["Details"].append(i["snippet"])
-                    output["URL"].append(i["web_url"])
-                    output["Title"].append(i["headline"]["main"])
-                return output
-                #temp = ""
-                #for i in range(len(output["Title"])):
-                #    temp += f"({output["Title"][i]}, {output["Details"][i]}, {output["URL"][i]})" + "\n"
-                #return temp
-            else:
-                err = response.status_code
-                print(f'API Status Error for NYT.py getSection: {err}')
-    except:
-        print("API Error for NYT.py getSection")
+    #try:
+    with urllib.request.urlopen(urlTemp) as response:
+        if (response.getcode() == 200):
+            data = json.loads(response.read())
+            output = {"Title": [], "Details": [], "URL":[]}
+            for i in data["response"]["docs"]:
+                output["Details"].append(i["snippet"])
+                output["URL"].append(i["web_url"])
+                output["Title"].append(i["headline"]["main"])
+            return output
+            #temp = ""
+            #for i in range(len(output["Title"])):
+            #    temp += f"({output["Title"][i]}, {output["Details"][i]}, {output["URL"][i]})" + "\n"
+            #return temp
+        else:
+            err = response.status_code
+            print(f'API Status Error for NYT.py getSection: {err}')
+    #except:
+    #    print("API Error for NYT.py getSection")
 
 def getNewsDesk(nDesk):
     input = ""
@@ -145,5 +147,5 @@ def getNewsDesk(nDesk):
 
 
 #print(getPopular("emailed", 1))
-#print(getSection("Science"))
+#print(getSection("Autos"))
 #print(getNewsDesk("Sports"))

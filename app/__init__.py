@@ -68,14 +68,8 @@ def home():
             stock_personal_dict[db.getStockName(i)] = i
 
         news_list = db.getUserNewsSections(session.get('userID'))
-        print("\n\n\n")
-        print(news_list)
-        print("\n\n\n")
         news_personal_dict = {"Headings": [] , "Desc" : [], "Link" : []}
         for i in news_list:
-            print("\n\n\n")
-            print(i)
-            print("\n\n\n")
             temp_dict = NYT.getSection(i)
             for j, k in temp_dict.items():
                 if j == "Title":
@@ -87,8 +81,6 @@ def home():
                 if j == "URL":
                     for l in k:
                         news_personal_dict["Link"].append(l)
-        print(list(news_personal_dict.items()))
-
         
         if(db.getUserCity(session.get('userID')) == ''):
             #FOR CALENDARIFIC
@@ -171,6 +163,8 @@ def signup():
 ##########################################
 @app.route("/stock", methods=['GET','POST'])
 def stockPage():
+    if 'userID' not in session:
+        return redirect(url_for('home'))
     if request.method == 'POST':
         if os.path.exists("static/img.png"):
           os.remove("static/img.png")
@@ -187,6 +181,8 @@ def stockPage():
 ##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
+    if 'userID' not in session:
+        return redirect(url_for('home'))
     user = db.getUsername(session.get('userID'))
     city = db.getUserCity(session.get('userID'))
     news = db.getUserNewsSections(session.get('userID'))
@@ -195,6 +191,8 @@ def profile():
 ##########################################
 @app.route("/preferences", methods=['GET', 'POST'])
 def prefs():
+    if 'userID' not in session:
+        return redirect(url_for('home'))
     city = ""
     stocks = []
     news = []
