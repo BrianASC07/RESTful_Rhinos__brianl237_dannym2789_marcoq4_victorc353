@@ -145,3 +145,6 @@ dannyM -- 2024-12-16 19:12
 brianL -- 2024-12-16 20:13
 * fixed a bunch of miscellaneous bugs and issues
 * updated design doc
+
+dannyM -- 2024-12-16 23:47
+* Finished all NYT functionalities
