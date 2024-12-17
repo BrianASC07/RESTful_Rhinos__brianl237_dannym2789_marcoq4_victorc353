@@ -67,7 +67,29 @@ def home():
         for i in stock_list:
             stock_personal_dict[db.getStockName(i)] = i
 
-        news_list = {'From the screen': "Where's my crown that's my bling", 'To the ring': 'Always drama when I ring', 'To the pen': 'See I believe that if I see it in my heart', 'To the king': "Smash through the ceiling 'cus I'm reaching for the stars"}
+        news_list = db.getUserNewsSections(session.get('userID'))
+        print("\n\n\n")
+        print(news_list)
+        print("\n\n\n")
+        news_personal_dict = {"Headings": [] , "Desc" : [], "Link" : []}
+        for i in news_list:
+            print("\n\n\n")
+            print(i)
+            print("\n\n\n")
+            temp_dict = NYT.getSection(i)
+            for j, k in temp_dict.items():
+                if j == "Title":
+                    for l in k:
+                        news_personal_dict["Headings"].append(l)
+                if j == "Details":
+                    for l in k:
+                        news_personal_dict["Desc"].append(l)
+                if j == "URL":
+                    for l in k:
+                        news_personal_dict["Link"].append(l)
+        print(list(news_personal_dict.items()))
+
+        
         if(db.getUserCity(session.get('userID')) == ''):
             #FOR CALENDARIFIC
             today_holiday = Calendarific.getHoliday("")
@@ -100,7 +122,7 @@ def home():
         return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info,
                                city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp,
                                all_stocks = stock_personal_dict,
-                               all_news = news_list)
+                               all_news = news_personal_dict)
 
     print("NOT LOGGED IN\n")
 

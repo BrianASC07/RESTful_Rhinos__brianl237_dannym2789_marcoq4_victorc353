@@ -68,7 +68,7 @@ def getSection(section):
     sectionList = []
     
     # Reads CSV file containing all Sections tags
-    with open('Sections.csv', 'r') as file:
+    with open('APIModule/Sections.csv', 'r') as file:
         read = csv.reader(file)
         for i in read:
             sectionList.append(i[0])
@@ -84,14 +84,15 @@ def getSection(section):
         with urllib.request.urlopen(urlTemp) as response:
             if (response.getcode() == 200):
                 data = json.loads(response.read())
-                output = {"Links": [], "Article_Names": []}
+                output = {"Title": [], "Details": [], "URL":[]}
                 for i in data["response"]["docs"]:
-                    output["Links"].append(i["web_url"])
-                    output["Article_Names"].append(i["headline"]["main"])
+                    output["Details"].append(i["snippet"])
+                    output["URL"].append(i["web_url"])
+                    output["Title"].append(i["headline"]["main"])
                 return output
                 #temp = ""
-                #for i in range(len(output["Links"])):
-                #    temp += f"({output["Links"][i]}, {output["Article_Names"][i]})" + "\n"
+                #for i in range(len(output["Title"])):
+                #    temp += f"({output["Title"][i]}, {output["Details"][i]}, {output["URL"][i]})" + "\n"
                 #return temp
             else:
                 err = response.status_code

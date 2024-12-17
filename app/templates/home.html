@@ -89,9 +89,9 @@
             </div>
             <div class = "flew flex-col block mt-1 text-weezer md:text-lg lg:text-xl leading-tight font-medium bg-slate-300 rounded-lg pl-5 pr-5">
               <p class="pb-5 text-center">Today's News</p>
-              {% for headline, descriptions in all_news.items() %}
+              {% for n in range(all_news.Headings|length - 1) %}
               <ul>
-                <li> <a href= "#" class="hover:underline">{{headline}}</a> <br class="hidden sm:inline" /><sub>{{descriptions}}</li>
+                <li> <a href= '{{all_news.Link[n]}}' class="hover:underline">{{all_news.Headings[n]}}</a> <br class="hidden sm:inline" /><sub>{{all_news.Desc[n]}}</li>
               </ul>
               {% endfor %}
             </div>
