@@ -167,9 +167,22 @@ def stockPage():
 ##########################################
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
+    user = db.getUsername(session.get('userID'))
+    city = db.getUserCity(session.get('userID'))
+    news = db.getUserNewsSections(session.get('userID'))
+    stocks = db.getUserStocks(session.get('userID'))
+    return render_template('profile.html', pref_city = city, pref_stocks = stocks, news_sections = news, username = user)
+##########################################
+@app.route("/preferences", methods=['GET', 'POST'])
+def prefs():
     city = ""
     stocks = []
     news = []
+
+    stockList = list(db.getStockDict().keys())
+    newsSectionList = db.getNewsSections()
+    cityList = list(db.getCityDict().keys())
+
     if request.method == 'POST':
         id = session.get('userID')
         city = request.form.get('city_name')
@@ -183,25 +196,24 @@ def profile():
         print("STOCKS: " + str(stocks))
         print("NEWS SECTIONS: " + str(news))
         db.addPrefs(id, city, stocks, news)
-        print("ARRIVED AT PROFILE PAGE")
-    user = db.getUsername(session.get('userID'))
+        print("ARRIVED AT PROFILE PAGE")    
+        print("ARRIVED AT PREFERENCE CHANGE PAGE")
+        form_type = request.form.get('form_type')
+        if form_type == 'returnhome':
+            return redirect(url_for("home"))
+        if form_type == 'submit':
+            return redirect(url_for("profile"))
 
-    return render_template('profile.html', pref_city = city, pref_stocks = stocks, news_sections = news, username = user)
-##########################################
-@app.route("/preferences", methods=['GET', 'POST'])
-def prefs():
-    if request.method == 'POST':
-        print("RECEIVING DATA")
-    print("ARRIVED AT PREFERENCE CHANGE PAGE")
-    stockList = list(db.getStockDict().keys())
-    newsSectionList = db.getNewsSections()
-    cityList = list(db.getCityDict().keys())
+
     user = db.getUsername(session.get('userID'))
     locationPrefs = db.getUserCity(session.get('userID'))
     newsSectionPrefs = db.getUserNewsSections(session.get('userID'))
     stockPrefs = db.getUserStocks(session.get('userID'))
+
     print("printing db")
-    #db.printData("userData")
+    print(db.getUsername(session.get('userID')))
+    print(db.getUserCity(session.get('userID')))
+    db.printData("userData")
     return render_template('prefs.html', cities = cityList, stocks = stockList, sections = newsSectionList, username = user, userlocation = locationPrefs, usernews = newsSectionPrefs, userstocks = stockPrefs)
 ##########################################
 @app.route("/logout")
