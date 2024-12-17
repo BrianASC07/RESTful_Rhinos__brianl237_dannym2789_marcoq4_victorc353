@@ -56,7 +56,7 @@
 
         <br><p>You have to choose each type individually <br> Hold Left Control to select multiple</p>
         <br>
-        <form method="POST" action="/profile">
+        <form method="POST" formaction="/profile">
           <label for="city_name">Choose the city you live in:</label>
           <select name="city_name" id = "city_name">
             {% for city in cities %}
@@ -84,11 +84,9 @@
           </select>
           <br class="hidden sm:inline" />
           <br class="hidden sm:inline" />
-          <input type="submit" name="sub1">
+          <input type="submit" name="type" value="submit">
           <br>
-          <a href="/">
-            <button type="submit" name="type" value="returnhome">Return to Homepage</button>
-          </a>
+          <button type="submit" name="type" value="returnhome" formaction="/">Return to Homepage</button>
         </form>
       </div>
     </div>
