@@ -468,7 +468,7 @@ def addPrefs(userID, city, stockSymbols, newsSections): #stockSymbols, newsSecti
     if(len(newsSections) > 0):
         executable = "UPDATE newsContentPreferences SET "
         for i in newsSections:
-            executable = executable + i + " = 1, "
+            executable = executable + "'"  + i + "' = 1, "
         executable = executable[:-2] + f" WHERE userID = {userID}"
         print(executable)
         c.execute(executable)
