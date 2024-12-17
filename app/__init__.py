@@ -79,11 +79,10 @@ def home():
             feel_temp = ''
             weather = ''
             weather_desc = ''
-            #FOR FMP
         else:
             #FOR CALENDARIFIC
             today_holiday = Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
-            holiday_info =  Calendarific.getHoliday(db.getCityDict()[db.getUserCity(session.get('userID'))])
+            holiday_info =  Calendarific.getHolidayInfo(db.getCityDict()[db.getUserCity(session.get('userID'))])
             #FOR OWM
             city_name = db.getUserCity(session.get('userID'))
             state_name = db.getCityDict()[db.getUserCity(session.get('userID'))].upper()
@@ -91,7 +90,6 @@ def home():
             feel_temp = str(round(OWM.getFeelsLike(city_name) - 273, 1)) + "C"
             weather = OWM.getMain(city_name)
             weather_desc = OWM.getDescription(city_name)
-            #FOR FMP
 
 
         if len(today_holiday) == 0:
