@@ -138,3 +138,6 @@ victorC --2024-12-16 15:10
 
 dannyM -- 2024-12-16 10:55
 * updated DB
+
+dannyM -- 2024-12-16 19:12
+* fixed NYT & usage problem
