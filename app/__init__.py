@@ -86,8 +86,8 @@ def home():
             #FOR OWM
             city_name = db.getUserCity(session.get('userID'))
             state_name = db.getCityDict()[db.getUserCity(session.get('userID'))].upper()
-            temp = str(round(OWM.getTemp(city_name) - 273, 1)) + "C"
-            feel_temp = str(round(OWM.getFeelsLike(city_name) - 273, 1)) + "C"
+            temp = str(round(OWM.getTemp(city_name) - 273, 1)) + u'\N{DEGREE SIGN}' + "C"
+            feel_temp = str(round(OWM.getFeelsLike(city_name) - 273, 1)) + u'\N{DEGREE SIGN}' + "C"
             weather = OWM.getMain(city_name)
             weather_desc = OWM.getDescription(city_name)
 
@@ -98,7 +98,7 @@ def home():
         print(stock_list)
         #db.printData("stockPreferences")
         return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info,
-                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp,
+                               city = city_name, state = state_name, weather_main = weather, weather_desc = weather_desc, temp_info = temp, feel_temp = feel_temp,
                                all_stocks = stock_personal_dict,
                                all_news = news_list)
 
@@ -155,6 +155,8 @@ def stockPage():
         name = request.form.get("name")
         dict = db.getStockDict()
         FMP.getStockPlot(dict[name], name)
+        print("Stock plot name: " + dict[name])
+        print("Route name:" + name)
         session['stockName'] = name
         return render_template('stock.html', stock_name=name)
     name = session['stockName']
