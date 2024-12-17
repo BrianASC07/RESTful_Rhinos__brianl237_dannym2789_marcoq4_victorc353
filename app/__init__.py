@@ -100,7 +100,7 @@ def home():
         print(stock_list)
         #db.printData("stockPreferences")
         return render_template('home.html', loggedin=True, holiday_today = today_holiday, holiday_stuff=holiday_info,
-                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp, weather_desc = weather_desc,
+                               city = city_name, state = state_name, weather_main = weather, temp_info = temp, feel_temp = feel_temp,
                                all_stocks = stock_personal_dict,
                                all_news = news_list)
 
@@ -196,7 +196,7 @@ def prefs():
         print("STOCKS: " + str(stocks))
         print("NEWS SECTIONS: " + str(news))
         db.addPrefs(id, city, stocks, news)
-        print("ARRIVED AT PROFILE PAGE")    
+        print("ARRIVED AT PROFILE PAGE")
         print("ARRIVED AT PREFERENCE CHANGE PAGE")
         form_type = request.form.get('form_type')
         if form_type == 'returnhome':
